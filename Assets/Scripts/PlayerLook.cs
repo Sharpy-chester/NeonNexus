@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerLook : MonoBehaviour
 {
-    Camera cam;
+    [SerializeField] Transform vCam;
 
     [Tooltip("Sensitivity of the camera")]
     [SerializeField] float sens;
@@ -18,7 +18,6 @@ public class PlayerLook : MonoBehaviour
 
     void Start()
     {
-        cam = GetComponentInChildren<Camera>();
         Cursor.lockState = lockCursor ? CursorLockMode.Locked : CursorLockMode.None;
         Cursor.visible = !lockCursor;
     }
@@ -32,19 +31,14 @@ public class PlayerLook : MonoBehaviour
 
             xrot = Mathf.Clamp(xrot, -90.0f, 90.0f);
 
-            cam.transform.localRotation = Quaternion.Euler(xrot, 0, 0);
+            vCam.localRotation = Quaternion.Euler(xrot, 0, 0);
             transform.rotation = Quaternion.Euler(0, yrot, 0);
         }
     }
 
     private void FixedUpdate()
     {
-        xrot -= Input.GetAxisRaw("Mouse Y") * sens * multi;
-        yrot += Input.GetAxisRaw("Mouse X") * sens * multi;
-        xrot = Mathf.Clamp(xrot, -90.0f, 90.0f);
-        cam.transform.position = transform.position;
-        cam.transform.localRotation = Quaternion.Euler(xrot, 0, 0);
-        transform.rotation = Quaternion.Euler(0, yrot, 0);
+        
     }
 
     public void ToggleCursor()

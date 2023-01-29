@@ -5,8 +5,10 @@ using UnityEngine;
 public class PlayerJump : MonoBehaviour
 {
     Rigidbody rb;
+    PlayerWallRun wallRun;
     internal bool canJump = true;
     [SerializeField] float jumpForce;
+    [SerializeField] float wallRunJumpForce;
     [SerializeField] float groundedDist = 1.1f;
 
     public delegate void OnGrounded();
@@ -17,6 +19,7 @@ public class PlayerJump : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        wallRun = GetComponent<PlayerWallRun>();
     }
 
     void Update()
@@ -38,11 +41,32 @@ public class PlayerJump : MonoBehaviour
             }
         }
 
-        //Jump
-        if (Input.GetButtonDown("Jump") && grounded && canJump)
+        if(Input.GetButtonDown("Jump") && canJump)
         {
-            rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+            if(wallRun && wallRun.isWallRunning && !grounded) //wall run jump
+            {
+                switch (wallRun.wallRunDir)
+                {
+                    case PlayerWallRun.WallRunDirection.left:
+                        rb.AddRelativeForce(new Vector3(wallRunJumpForce, jumpForce, 0), ForceMode.Impulse);
+                        break;
+                    case PlayerWallRun.WallRunDirection.right:
+                        rb.AddRelativeForce(new Vector3(-wallRunJumpForce, jumpForce, 0), ForceMode.Impulse);
+                        break;
+                    case PlayerWallRun.WallRunDirection.none:
+                        break;
+                    default:
+                        break;
+                }
+                wallRun.EndWallRun();
+            }
+            else if (grounded) //Normal Jump
+            {
+                rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+            }
         }
+
+
     }
 
     public bool Grounded()

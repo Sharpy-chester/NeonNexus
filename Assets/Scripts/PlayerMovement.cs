@@ -13,7 +13,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float runDrag = 6.0f;
     [Range(0.1f, 1)]
     [SerializeField] float airDrag = 0.0f;
-    [SerializeField] float airSpeed = 0.3f;
+    public float airSpeed = 0.3f;
+    internal float startAirSpeed = 0.3f;
 
     Vector3 direction;
     float speed;
@@ -25,6 +26,7 @@ public class PlayerMovement : MonoBehaviour
         rb.freezeRotation = true;
         speed = runSpeed;
         jump = GetComponent<PlayerJump>();
+        startAirSpeed = airSpeed;
     }
 
     void Update()
