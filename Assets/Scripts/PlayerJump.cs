@@ -7,6 +7,7 @@ public class PlayerJump : MonoBehaviour
     Rigidbody rb;
     PlayerWallRun wallRun;
     internal bool canJump = true;
+    internal bool hasJumped = false;
     [SerializeField] float jumpForce;
     [SerializeField] float wallRunJumpForce;
     [SerializeField] float groundedDist = 1.1f;
@@ -30,6 +31,7 @@ public class PlayerJump : MonoBehaviour
             if (!grounded)
             {
                 grounded = true;
+                hasJumped = false;
                 onGrounded?.Invoke();
             }
         }
@@ -62,6 +64,7 @@ public class PlayerJump : MonoBehaviour
             }
             else if (grounded) //Normal Jump
             {
+                hasJumped = true;
                 rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
             }
         }

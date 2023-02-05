@@ -22,6 +22,14 @@ public class GameManager : MonoBehaviour
         Cursor.visible = true;
     }
 
+    public void Lose()
+    {
+        uiManager.EnableLoseScreen();
+        Destroy(player);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
     public void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
