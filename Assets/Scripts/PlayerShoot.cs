@@ -8,12 +8,18 @@ public class PlayerShoot : MonoBehaviour
     [SerializeField] float bulletForce;
     [SerializeField] int bulletDamage;
     [SerializeField] Transform fireTransform;
+    [SerializeField] Animator gunAnim;
+    [SerializeField] GameObject muzzleFlash;
+
 
     void Update()
     {
         if (Input.GetButtonDown("Fire1"))
         {
             GameObject bullet = Instantiate(bulletPrefab, fireTransform);
+            gunAnim.SetTrigger("Fire");
+            GameObject mFlash = Instantiate(muzzleFlash, fireTransform);
+            Destroy(mFlash, 1);
             bullet.transform.parent = null;
             Bullet b = bullet.GetComponent<Bullet>();
             Rigidbody rb = bullet.GetComponent<Rigidbody>();
