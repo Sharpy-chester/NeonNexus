@@ -83,4 +83,9 @@ public class PlayerJump : MonoBehaviour
             return false;
         } 
     }
+
+    public void IncreaseJumpForce(float amt)
+    {
+        jumpForce += amt;
+    }
 }

@@ -16,4 +16,9 @@ public class ItemObj : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public void SetItem(Item newItem)
+    {
+        item = newItem;
+    }
 }

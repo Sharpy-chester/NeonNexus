@@ -60,4 +60,9 @@ public class PlayerMovement : MonoBehaviour
         //diagonal, they go faster than the move speed
         rb.AddForce(direction.normalized * speed, ForceMode.Acceleration);
     }
+
+    public void IncreaseSpeed(float amt)
+    {
+        runSpeed += amt;
+    }
 }

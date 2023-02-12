@@ -20,6 +20,13 @@ public class Health : MonoBehaviour
         CheckHealth();
     }
 
+    public void IncreaseMaxHealth(int amt)
+    {
+        maxHealth += amt;
+        currentHealth += amt;
+        CheckHealth();
+    }
+
     void CheckHealth()
     {
         if (currentHealth <= 0)

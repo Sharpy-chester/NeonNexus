@@ -4,13 +4,21 @@ using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
-    // Start is called before the first frame update
+    ItemList itemList;
+    [SerializeField] GameObject itemPrefab;
+    [SerializeField] List<ItemPoint> itemPoints;
+
     void Start()
     {
-        
+        itemList = FindObjectOfType<ItemList>();
+        //choose random item point
+        int rand = Random.Range(0, itemPoints.Count);
+        GameObject newItem = Instantiate(itemPrefab, itemPoints[rand].transform);
+        //choose random item
+        rand = Random.Range(0, itemList.itemList.Count);
+        newItem.GetComponent<ItemObj>().SetItem(itemList.itemList[rand]);
     }
 
-    // Update is called once per frame
     void Update()
     {
         

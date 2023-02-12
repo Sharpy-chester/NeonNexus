@@ -7,6 +7,7 @@ public class PlayerShoot : MonoBehaviour
     [SerializeField] int bulletDamage;
     [SerializeField] Transform fireTransform;
     [SerializeField] Animator gunAnim;
+    [SerializeField] AnimationClip shootAnim;
     [SerializeField] GameObject muzzleFlash;
     public float weaponCooldown = 0.5f;
     [SerializeField] float cooldownCap = 0.1f;
@@ -16,6 +17,7 @@ public class PlayerShoot : MonoBehaviour
     private void Start()
     {
         cam = Camera.main.transform;
+        gunAnim.SetFloat("AnimMultiplier", weaponCooldown / shootAnim.length);
     }
 
     void Update()
@@ -26,7 +28,7 @@ public class PlayerShoot : MonoBehaviour
             currentCooldown = 0;
             gunAnim.SetTrigger("Fire");
             GameObject mFlash = Instantiate(muzzleFlash, fireTransform);
-            Destroy(mFlash, 1);
+            Destroy(mFlash, 0.3f);
 
             if (Physics.Raycast(cam.position, cam.forward, out RaycastHit hit))
             {
@@ -43,6 +45,12 @@ public class PlayerShoot : MonoBehaviour
         if (weaponCooldown - amt >= cooldownCap)
         {
             weaponCooldown -= amt;
+            gunAnim.SetFloat("AnimMultiplier", weaponCooldown / shootAnim.length);
         }
+    }
+
+    public void IncreaseDamage(int amt)
+    {
+        bulletDamage += amt;
     }
 }
