@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: SpringShoes
   m_EditorClassIdentifier: 
   ItemName: Spring Shoes
-  Icon: {fileID: 0}
+  IconMat: {fileID: 2100000, guid: f52324c023a3daf4dab9a9eb7ee260e7, type: 2}
   Rarity: 4
   jumpForceIncrease: 3

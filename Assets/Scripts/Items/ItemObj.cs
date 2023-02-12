@@ -5,7 +5,13 @@ using UnityEngine;
 public class ItemObj : MonoBehaviour
 {
     [SerializeField] Item item;
+    [SerializeField] MeshRenderer itemImage;
     bool hit = false;
+
+    private void Start()
+    {
+        itemImage.material = item.IconMat;
+    }
 
     void OnTriggerEnter(Collider collision)
     {

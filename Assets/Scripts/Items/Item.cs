@@ -4,10 +4,10 @@ using UnityEngine;
 
 public abstract class Item : ScriptableObject
 {
-    [SerializeField] string ItemName;
-    [SerializeField] Sprite Icon;
+    public string ItemName;
+    public Material IconMat;
     [Tooltip("1-Low, 4-High")]
-    [SerializeField] int Rarity;
+    public int Rarity;
 
     public abstract void OnUpdate();
     public abstract void OnAdd(GameObject playerGO);

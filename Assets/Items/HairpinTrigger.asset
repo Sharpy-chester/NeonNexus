@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: HairpinTrigger
   m_EditorClassIdentifier: 
   ItemName: Hairpin Trigger
-  Icon: {fileID: 0}
+  IconMat: {fileID: 2100000, guid: a7b18d64c501279468e795e6801470a4, type: 2}
   Rarity: 3
   fireRateIncrease: 0.1

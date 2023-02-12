@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Vitamins
   m_EditorClassIdentifier: 
   ItemName: Vitamins
-  Icon: {fileID: 0}
+  IconMat: {fileID: 2100000, guid: db202d397993b694795613bb1fe048d2, type: 2}
   Rarity: 4
   healthIncrease: 2

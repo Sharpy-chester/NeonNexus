@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: FMJRounds
   m_EditorClassIdentifier: 
   ItemName: FMJ
-  Icon: {fileID: 0}
+  IconMat: {fileID: 2100000, guid: c967e8341476ec540b74d5ffb4b28771, type: 2}
   Rarity: 3
   damageIncrease: 2

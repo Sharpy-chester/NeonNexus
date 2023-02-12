@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: DoubleJump
   m_EditorClassIdentifier: 
   ItemName: DoubleJump
-  Icon: {fileID: 0}
+  IconMat: {fileID: 2100000, guid: d866021c2f87ed34ba0b6adf581881fd, type: 2}
   Rarity: 1
   jumpForce: 10

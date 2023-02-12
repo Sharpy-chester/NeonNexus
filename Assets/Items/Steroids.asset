@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Steroids
   m_EditorClassIdentifier: 
   ItemName: Steroids
-  Icon: {fileID: 0}
+  IconMat: {fileID: 2100000, guid: 760ecd511555270448edb77150d7aae2, type: 2}
   Rarity: 4
   speedIncrease: 20
