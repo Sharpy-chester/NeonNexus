@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1834842429}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.415}
+  m_LocalPosition: {x: 0.018, y: 0, z: 1.368}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -256,7 +256,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpForce: 10
-  wallRunJumpForce: 10
+  wallRunJumpForce: 5
   groundedDist: 1.1
 --- !u!114 &2894422822788925999
 MonoBehaviour:
@@ -284,12 +284,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c011192bc8c6a194a947ae771fcb599a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 4065710152058866701, guid: 4f874db6d558f0f419124cf34cc5f496,
-    type: 3}
-  bulletForce: 50
   bulletDamage: 3
-  fireTransform: {fileID: 1834842430}
+  fireTransform: {fileID: 0}
   gunAnim: {fileID: 0}
+  shootAnim: {fileID: 7400000, guid: 2532c8068c77af54ea23c590f268ebf9, type: 2}
+  muzzleFlash: {fileID: 1782395880954752, guid: 3dd9cf2e209c504448f1c4c6835675cf,
+    type: 3}
+  weaponCooldown: 0.5
+  cooldownCap: 0.1
 --- !u!114 &1978887789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -329,7 +331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSlideTime: 2
-  slideForce: 50
+  slideForce: 130
   slideScale: 0.6
   downForce: 10
 --- !u!1 &2894422823131149484

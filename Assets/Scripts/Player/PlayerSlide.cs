@@ -6,6 +6,7 @@ public class PlayerSlide : MonoBehaviour
 {
     Rigidbody rb;
     PlayerMovement playerMove;
+    PlayerJump jump;
 
     [SerializeField] float maxSlideTime;
     float currentSlideTime = 0;
@@ -15,6 +16,7 @@ public class PlayerSlide : MonoBehaviour
     Transform cam;
     float startingScale;
     bool sliding = false;
+    Vector3 dir;
 
     void Start()
     {
@@ -22,11 +24,12 @@ public class PlayerSlide : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         playerMove = GetComponent<PlayerMovement>();
         cam = Camera.main.transform;
+        jump = GetComponent<PlayerJump>();
     }
 
     void Update()
     {
-        if (Input.GetButtonDown("Slide") && (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0))
+        if (Input.GetButtonDown("Slide") && (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0) && jump.Grounded())
         {
             StartSliding();
         }
@@ -49,6 +52,7 @@ public class PlayerSlide : MonoBehaviour
     {
         sliding = true;
         transform.localScale = new Vector3(transform.localScale.x, slideScale, transform.localScale.z);
+        dir = transform.forward * Input.GetAxisRaw("Vertical") + transform.right * Input.GetAxisRaw("Horizontal");
         rb.AddForce(Vector3.down * downForce, ForceMode.Impulse);
         currentSlideTime = maxSlideTime;
         playerMove.canRun = false;
@@ -64,11 +68,15 @@ public class PlayerSlide : MonoBehaviour
     void SlidingMovement()
     {
         currentSlideTime -= Time.fixedDeltaTime;
-        Vector3 dir = transform.forward * Input.GetAxisRaw("Vertical") + transform.right * Input.GetAxisRaw("Horizontal");
         rb.AddForce(dir.normalized * slideForce, ForceMode.Force);
         if(currentSlideTime <= 0)
         {
             StopSliding();
         }
+    }
+
+    public void IncreaseSlideForce(float amt)
+    {
+        slideForce += amt;
     }
 }

@@ -42,6 +42,8 @@ public class CityGenerator : MonoBehaviour
                 tiles[x,y] = Instantiate(tilePrefabs[rand], pos, Quaternion.identity);
                 tiles[x, y].name = string.Format("Tile x{0} y{1}", x, y);
                 currentYPos += tileWidth;
+                rand = Random.Range(1, 4);
+                tiles[x, y].transform.Rotate(new Vector3(0, rand * 90, 0));
             }
         }
     }

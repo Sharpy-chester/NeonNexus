@@ -58,7 +58,10 @@ public class PlayerMovement : MonoBehaviour
         //Physics updates in fixed update so doing it in here makes it smoother
         //Normalised the direction so that it has a magnatude of 1. Otherwise, if the player is going 
         //diagonal, they go faster than the move speed
-        rb.AddForce(direction.normalized * speed, ForceMode.Acceleration);
+        if(canRun)
+        {
+            rb.AddForce(direction.normalized * speed, ForceMode.Acceleration);
+        }
     }
 
     public void IncreaseSpeed(float amt)

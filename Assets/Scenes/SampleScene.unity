@@ -837,6 +837,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 99bc73c87cb43354088dbf8cee8b32b6, type: 2}
   - {fileID: 11400000, guid: 3cf34ac61eb8fd641a0d9dee32bbaecf, type: 2}
   - {fileID: 11400000, guid: 32f969ebddae63b4880fa6a2fd27d4ed, type: 2}
+  - {fileID: 11400000, guid: a5273b8fd73ab394c9ae788a420e04e7, type: 2}
 --- !u!1 &1152027792
 GameObject:
   m_ObjectHideFlags: 0
@@ -1937,47 +1938,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1834842430, guid: b7671bb7a00f3724f8e3c5db7db6f816, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.018
-      objectReference: {fileID: 0}
-    - target: {fileID: 1834842430, guid: b7671bb7a00f3724f8e3c5db7db6f816, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1.368
-      objectReference: {fileID: 0}
     - target: {fileID: 1978887780, guid: b7671bb7a00f3724f8e3c5db7db6f816, type: 3}
       propertyPath: gunAnim
       value: 
       objectReference: {fileID: 2003451076}
     - target: {fileID: 1978887780, guid: b7671bb7a00f3724f8e3c5db7db6f816, type: 3}
-      propertyPath: shootAnim
-      value: 
-      objectReference: {fileID: 7400000, guid: 2532c8068c77af54ea23c590f268ebf9, type: 2}
-    - target: {fileID: 1978887780, guid: b7671bb7a00f3724f8e3c5db7db6f816, type: 3}
-      propertyPath: gunParticle
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1978887780, guid: b7671bb7a00f3724f8e3c5db7db6f816, type: 3}
-      propertyPath: muzzleFlash
-      value: 
-      objectReference: {fileID: 1782395880954752, guid: 3dd9cf2e209c504448f1c4c6835675cf,
-        type: 3}
-    - target: {fileID: 1978887780, guid: b7671bb7a00f3724f8e3c5db7db6f816, type: 3}
       propertyPath: fireTransform
       value: 
       objectReference: {fileID: 897191280}
-    - target: {fileID: 1978887789, guid: b7671bb7a00f3724f8e3c5db7db6f816, type: 3}
-      propertyPath: items.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1978887789, guid: b7671bb7a00f3724f8e3c5db7db6f816, type: 3}
-      propertyPath: items.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: 9075a89bff719df44a896552c7997ef1,
-        type: 2}
     - target: {fileID: 1978887799, guid: b7671bb7a00f3724f8e3c5db7db6f816, type: 3}
-      propertyPath: slideForce
-      value: 130
+      propertyPath: maxSlideTime
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2894422822788925970, guid: b7671bb7a00f3724f8e3c5db7db6f816,
         type: 3}
@@ -2033,6 +2004,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2894422822788925971, guid: b7671bb7a00f3724f8e3c5db7db6f816,
+        type: 3}
+      propertyPath: m_Radius
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 2894422822788925974, guid: b7671bb7a00f3724f8e3c5db7db6f816,
         type: 3}
