@@ -38,7 +38,7 @@ public class CityGenerator : MonoBehaviour
             for (int y = 0; y < rowHeight; y++)
             {
                 int rand = Random.Range(0, tilePrefabs.Count);
-                Vector3 pos = new Vector3(tileWidth * x, 0, tileWidth * y);
+                Vector3 pos = new(tileWidth * x, 0, tileWidth * y);
                 tiles[x,y] = Instantiate(tilePrefabs[rand], pos, Quaternion.identity);
                 tiles[x, y].name = string.Format("Tile x{0} y{1}", x, y);
                 currentYPos += tileWidth;
