@@ -32,7 +32,7 @@ public class PlayerShoot : MonoBehaviour
 
             if (Physics.Raycast(cam.position, cam.forward, out RaycastHit hit))
             {
-                if (hit.transform.GetComponent<Turret>())
+                if (hit.transform.GetComponent<Enemy>())
                 {
                     hit.transform.GetComponent<Health>().ReduceHealth(bulletDamage);
                 }
