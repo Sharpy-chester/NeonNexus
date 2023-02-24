@@ -46,6 +46,6 @@ public class CityGenerator : MonoBehaviour
             }
         }
         GetComponent<NavMeshSurface>().BuildNavMesh();
-        
+        OcclusionArea area;
     }
 }
