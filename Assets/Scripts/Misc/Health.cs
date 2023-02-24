@@ -41,6 +41,10 @@ public class Health : MonoBehaviour
         {
             gm.Lose();
         }
+        else if (TryGetComponent(out Enemy enemy))
+        {
+            enemy.Die();
+        }
         else
         {
             Destroy(gameObject);

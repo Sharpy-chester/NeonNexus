@@ -17,6 +17,7 @@ public abstract class Enemy : MonoBehaviour
     internal GameObject player;
     internal NavMeshAgent navAgent;
     internal Animator animator;
+    internal Vector3 pos;
 
     public enum PlayerState
     {
@@ -32,15 +33,26 @@ public abstract class Enemy : MonoBehaviour
         player = FindObjectOfType<PlayerMovement>().gameObject;
         layerMask = 1 << (LayerMask.NameToLayer("Player")); //Filter out enemy layer
         animator = GetComponent<Animator>();
+        EnemyManager.Instance.AddEnemy(this);
     }
 
     public float DistToPlayer()
     {
-        return Vector3.Distance(player.transform.position, transform.position);
+        return gameObject.activeSelf ? Vector3.Distance(player.transform.position, transform.position) : Vector3.Distance(player.transform.position, pos);
     }
 
     public Vector3 DirToPlayer()
     {
         return (player.transform.position - eyeTransform.position).normalized;
+    }
+
+    public void Die()
+    {
+        EnemyManager.Instance.enemies.Remove(this);
+    }
+
+    private void OnDisable()
+    {
+        pos = transform.position;
     }
 }

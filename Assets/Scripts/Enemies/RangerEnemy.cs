@@ -29,9 +29,7 @@ public class RangerEnemy : Enemy
         {
             return;
         }
-        Ray ray = new(eyeTransform.position, DirToPlayer());
-        Debug.DrawRay(eyeTransform.position, DirToPlayer() * seeRange, Color.green);
-        
+        Ray ray = new(eyeTransform.position, DirToPlayer());        
         if (Physics.Raycast(ray, out RaycastHit hit, seeRange))
         {
             
