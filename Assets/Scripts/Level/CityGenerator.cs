@@ -13,7 +13,10 @@ public class CityGenerator : MonoBehaviour
     [SerializeField] int rowHeight = 8; //yes, one should be row and one should be column. Who cares
     [SerializeField] GameObject[,] tiles;
     [SerializeField] float currentXPos = 0, currentYPos = 0;
-    
+    [SerializeField] GameObject endPointPrefab;
+    internal GameObject endPoint;
+
+
 
     void Awake()
     {
@@ -27,7 +30,7 @@ public class CityGenerator : MonoBehaviour
             Random.InitState(seed);
         }
         tiles = new GameObject[rowLength, rowHeight];
-
+        int randPos = Random.Range(0, rowLength);
         for (int x = 0; x < rowLength; x++)
         {
             currentXPos += tileWidth;
@@ -43,9 +46,14 @@ public class CityGenerator : MonoBehaviour
                 rand = Random.Range(1, 4);
                 tiles[x, y].transform.Rotate(new Vector3(0, rand * 90, 0));
                 //tiles[x, y].GetComponent<NavMeshSurface>().BuildNavMesh();
+
+                if(y == rowLength - 1 && x == randPos)
+                {
+                    endPoint = Instantiate(endPointPrefab, tiles[x, y].GetComponent<Tile>().endPoint);
+                    endPoint.name = string.Format("EndPoint x{0} y{1}", x, y);
+                }
             }
         }
         GetComponent<NavMeshSurface>().BuildNavMesh();
-        OcclusionArea area;
     }
 }

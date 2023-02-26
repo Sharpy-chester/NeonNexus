@@ -58,7 +58,6 @@ public class EnemyManager : MonoBehaviour
             enemiesToTurnOn.Clear();
             yield return null;
         }
-        print("Broke");
     }
 
     public void AddEnemy(Enemy enemy)

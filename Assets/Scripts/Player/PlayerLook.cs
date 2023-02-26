@@ -36,9 +36,10 @@ public class PlayerLook : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    public void UpdateRot(float x, float y)
     {
-        
+        xrot = x;
+        yrot = y;
     }
 
     public void ToggleCursor()

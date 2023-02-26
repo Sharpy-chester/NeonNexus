@@ -2075,11 +2075,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7584ff79bbc2a84b9d419c66780589d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seeRange: 5000
+  seeRange: 20
   attackRange: 10
-  moveSpeed: 20
+  moveSpeed: 4
   acceleration: 8
   eyeTransform: {fileID: 5185926627495019184}
+  head: {fileID: 5870267475861798499}
   currentState: 0
   bulletPrefab: {fileID: 1912709954535586688, guid: c4058fac4370f384991fbed825c35814,
     type: 3}

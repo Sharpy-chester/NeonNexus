@@ -14,6 +14,9 @@ public class PlayerShoot : MonoBehaviour
     float currentCooldown = 0;
     Transform cam;
 
+    public delegate void OnShoot();
+    public event OnShoot onShoot;
+
     private void Start()
     {
         cam = Camera.main.transform;
@@ -25,6 +28,7 @@ public class PlayerShoot : MonoBehaviour
         currentCooldown += Time.deltaTime;
         if (Input.GetButtonDown("Fire1") && currentCooldown > weaponCooldown)
         {
+            onShoot?.Invoke();
             currentCooldown = 0;
             gunAnim.SetTrigger("Fire");
             GameObject mFlash = Instantiate(muzzleFlash, fireTransform);
@@ -45,7 +49,8 @@ public class PlayerShoot : MonoBehaviour
         if (weaponCooldown - amt >= cooldownCap)
         {
             weaponCooldown -= amt;
-            gunAnim.SetFloat("AnimMultiplier", weaponCooldown / shootAnim.length);
+            gunAnim.SetFloat("AnimMultiplier", shootAnim.length / weaponCooldown);
+            print(shootAnim.length / weaponCooldown);
         }
     }
 

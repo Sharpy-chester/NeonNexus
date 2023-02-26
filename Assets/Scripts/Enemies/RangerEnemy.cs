@@ -13,10 +13,12 @@ public class RangerEnemy : Enemy
     [SerializeField] float bulletForce;
     [SerializeField] float fireRate = 1;
     float currentCooldown = 0;
+    int shootLayerMask;
 
     void Start()
     {
         InitVariables();
+        shootLayerMask = ~(1 << LayerMask.NameToLayer("Bullet") | 1 << LayerMask.NameToLayer("Enemy"));
         navAgent = gameObject.AddComponent<NavMeshAgent>();
         navAgent.speed = moveSpeed;
         navAgent.acceleration = acceleration;
@@ -24,22 +26,22 @@ public class RangerEnemy : Enemy
 
     void Update()
     {
-        currentCooldown += Time.deltaTime;
-        if (!player)
+        
+        if (!player || !alive)
         {
             return;
         }
         Ray ray = new(eyeTransform.position, DirToPlayer());        
-        if (Physics.Raycast(ray, out RaycastHit hit, seeRange))
+        if (Physics.Raycast(ray, out RaycastHit hit, seeRange, shootLayerMask))
         {
-            
             if (hit.transform.CompareTag("Player"))
             {
-                
-
                 canSeePlayer = true;
                 if (DistToPlayer() < attackRange)
                 {
+                    transform.LookAt(player.transform, Vector3.up);
+                    transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
+                    currentCooldown += Time.deltaTime;
                     if (currentCooldown > fireRate)
                     {
                         AttackPlayer();
@@ -48,16 +50,19 @@ public class RangerEnemy : Enemy
                 }
                 else
                 {
+                    currentCooldown = 0;
                     RunTowardPlayer();
                 }
             }
             else
             {
+                Idle();
                 canSeePlayer = false;
             }
         }
-        else
+        else if (!player)
         {
+            Idle();
             canSeePlayer = false;
         }
     }
@@ -73,11 +78,16 @@ public class RangerEnemy : Enemy
     void AttackPlayer()
     {
         currentState = PlayerState.Attacking;
-        transform.LookAt(player.transform, Vector3.up);
-        transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
         animator.SetTrigger("Attack");
         navAgent.isStopped = true;
         ShootBullet();
+    }
+
+    void Idle()
+    {
+        currentState = PlayerState.Idle;
+        navAgent.isStopped = true;
+        animator.SetTrigger("Idle");
     }
 
     void ShootBullet()

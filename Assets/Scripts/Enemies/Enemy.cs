@@ -11,8 +11,10 @@ public abstract class Enemy : MonoBehaviour
     public float moveSpeed;
     public float acceleration;
     public Transform eyeTransform;
+    public Transform head;
     internal int layerMask;
     internal bool canSeePlayer = false;
+    internal bool alive = true;
 
     internal GameObject player;
     internal NavMeshAgent navAgent;
@@ -48,7 +50,13 @@ public abstract class Enemy : MonoBehaviour
 
     public void Die()
     {
+        alive = false;
         EnemyManager.Instance.enemies.Remove(this);
+        animator.SetTrigger("Die");
+        Destroy(GetComponent<Collider>());
+        Destroy(GetComponent<Rigidbody>());
+        navAgent.isStopped = true;
+        Destroy(gameObject, 5f);
     }
 
     private void OnDisable()

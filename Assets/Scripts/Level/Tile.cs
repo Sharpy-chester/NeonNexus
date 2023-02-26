@@ -7,6 +7,7 @@ public class Tile : MonoBehaviour
     ItemList itemList;
     [SerializeField] GameObject itemPrefab;
     [SerializeField] List<ItemPoint> itemPoints;
+    public Transform endPoint;
 
     void Start()
     {
