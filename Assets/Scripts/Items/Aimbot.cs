@@ -20,13 +20,8 @@ public class Aimbot : Item
         float closestDistance = Mathf.Infinity;
         foreach (Enemy e in enemies)
         {
-            // Get the vector from the camera to the enemy
             Vector3 toEnemy = e.transform.position - cam.transform.position;
-
-            // Calculate the angle between the camera's forward vector and the vector to the enemy
             float angle = Vector3.Angle(cam.transform.forward, toEnemy);
-
-            // If the enemy is within the max angle and closer than the current closest enemy, update the closest enemy
             if (angle <= lockOnAngle && toEnemy.magnitude < closestDistance)
             {
                 closestEnemy = e;

@@ -18,10 +18,9 @@ public class Tile : MonoBehaviour
         //choose random item
         rand = Random.Range(0, itemList.itemList.Count);
         newItem.GetComponent<ItemObj>().SetItem(itemList.itemList[rand]);
-    }
-
-    void Update()
-    {
-        
+        if(itemList.itemList[rand].removeFromPool)
+        {
+            itemList.itemList.RemoveAt(rand);
+        }
     }
 }
