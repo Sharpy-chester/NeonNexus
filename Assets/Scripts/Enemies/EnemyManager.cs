@@ -41,7 +41,6 @@ public class EnemyManager : MonoBehaviour
                 foreach (Enemy e in enemiesToTurnOff)
                 {
                     e.gameObject.SetActive(false);
-                    yield return null;
                 }
             }
             List<Enemy> enemiesToTurnOn = enemies.Where(enemy => !enemy.gameObject.activeSelf && enemy.DistToPlayer() <= enemyRenderDist).ToList();
@@ -54,7 +53,6 @@ public class EnemyManager : MonoBehaviour
                 }
             }
             enemiesToTurnOff.Clear();
-            yield return null;
             enemiesToTurnOn.Clear();
             yield return null;
         }

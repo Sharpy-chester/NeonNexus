@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerItemManager : MonoBehaviour
 {
     [SerializeField] List<Item> items;
+    UIManager uiManager;
     
     void Start()
     {
@@ -12,6 +13,7 @@ public class PlayerItemManager : MonoBehaviour
         {
             i.OnAdd(gameObject);
         }
+        uiManager = FindObjectOfType<UIManager>();
     }
 
     void Update()
@@ -34,5 +36,6 @@ public class PlayerItemManager : MonoBehaviour
     {
         items.Add(item);
         item.OnAdd(gameObject);
+        uiManager.DisplayItemPopup(item);
     }
 }

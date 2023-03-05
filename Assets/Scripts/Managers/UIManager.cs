@@ -11,6 +11,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] Slider healthSlider;
     [SerializeField] TextMeshProUGUI moneyText;
     [SerializeField] TextMeshProUGUI timerText;
+    [SerializeField] GameObject itemPopup;
+    [SerializeField] TextMeshProUGUI itemPopupTitle, itemPopupDescription;
     GameManager gameManager;
     float timer;
 
@@ -46,5 +48,12 @@ public class UIManager : MonoBehaviour
     void UpdateMoneyText()
     {
         moneyText.text = gameManager.money.ToString();
+    }
+
+    public void DisplayItemPopup(Item item)
+    {
+        itemPopup.SetActive(true);
+        itemPopupTitle.text = item.ItemName;
+        itemPopupDescription.text = item.Description;
     }
 }

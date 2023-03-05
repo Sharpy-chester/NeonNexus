@@ -19,6 +19,7 @@ public class ItemObj : MonoBehaviour
         {
             hit = true;
             collision.transform.GetComponent<PlayerItemManager>().AddItem(item);
+            
             Destroy(gameObject);
         }
     }

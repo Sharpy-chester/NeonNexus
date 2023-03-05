@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class Item : ScriptableObject
 {
     public string ItemName;
+    public string Description;
     public Material IconMat;
     [Tooltip("1-Low, 4-High")]
     public int Rarity;

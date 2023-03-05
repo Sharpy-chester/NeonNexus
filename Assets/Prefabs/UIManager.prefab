@@ -47,3 +47,8 @@ MonoBehaviour:
   winScreen: {fileID: 0}
   loseScreen: {fileID: 0}
   healthSlider: {fileID: 0}
+  moneyText: {fileID: 0}
+  timerText: {fileID: 0}
+  itemPopup: {fileID: 0}
+  itemPopupTitle: {fileID: 0}
+  itemPopupDescription: {fileID: 0}
