@@ -10,6 +10,7 @@ public abstract class Enemy : MonoBehaviour
     public float attackRange;
     public float moveSpeed;
     public float acceleration;
+    public int moneyGiven = 25;
     public Transform eyeTransform;
     public Transform head;
     internal int layerMask;
@@ -50,6 +51,7 @@ public abstract class Enemy : MonoBehaviour
 
     public void Die()
     {
+        FindObjectOfType<GameManager>().AddMoney(moneyGiven);
         alive = false;
         EnemyManager.Instance.enemies.Remove(this);
         animator.SetTrigger("Die");

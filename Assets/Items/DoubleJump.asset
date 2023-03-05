@@ -15,4 +15,5 @@ MonoBehaviour:
   ItemName: DoubleJump
   IconMat: {fileID: 2100000, guid: d866021c2f87ed34ba0b6adf581881fd, type: 2}
   Rarity: 1
+  removeFromPool: 1
   jumpForce: 10

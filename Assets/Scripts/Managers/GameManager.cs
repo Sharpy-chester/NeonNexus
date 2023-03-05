@@ -7,6 +7,10 @@ public class GameManager : MonoBehaviour
 {
     UIManager uiManager;
     GameObject player;
+    public int money { get; private set; }
+
+    public delegate void OnMoneyChanged();
+    public event OnMoneyChanged onMoneyChanged;
 
     private void Awake()
     {
@@ -33,5 +37,11 @@ public class GameManager : MonoBehaviour
     public void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void AddMoney(int moneyToAdd)
+    {
+        money += moneyToAdd;
+        onMoneyChanged?.Invoke();
     }
 }

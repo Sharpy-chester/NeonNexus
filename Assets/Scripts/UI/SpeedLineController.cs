@@ -16,7 +16,7 @@ public class SpeedLineController : MonoBehaviour
 
     void Update()
     {
-        if (playerRB.velocity.magnitude > minVelocity)
+        if (playerRB && playerRB.velocity.magnitude > minVelocity)
         {
             speedLinePS.Play();
         }

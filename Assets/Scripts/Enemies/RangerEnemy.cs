@@ -71,8 +71,8 @@ public class RangerEnemy : Enemy
     {
         navAgent.isStopped = false;
         currentState = PlayerState.Running;
-        navAgent.SetDestination(player.transform.position);
         animator.SetTrigger("Run");
+        navAgent.SetDestination(player.transform.position);
     }
 
     void AttackPlayer()
@@ -99,8 +99,8 @@ public class RangerEnemy : Enemy
         if (b && rb)
         {
             b.bulletDamage = bulletDamage;
+            b.transform.LookAt(player.transform);
             rb.AddForce(bullet.transform.forward * bulletForce, ForceMode.Impulse);
         }
-
     }
 }

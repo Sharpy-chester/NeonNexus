@@ -179,7 +179,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
+  m_Radius: 0.4
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -304,7 +304,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b2a245c8d60dd643b78780d6ddd268e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items: []
+  items:
+  - {fileID: 11400000, guid: 73b2ffd0db3773249b368192815191f4, type: 2}
 --- !u!114 &1978887790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -317,7 +318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5137b50d918ba849a8799153e4f1a1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
+  maxHealth: 10
 --- !u!114 &1978887799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,7 +331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0df4ba27b138f804a85639fe570cfcb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSlideTime: 2
+  maxSlideTime: 0.5
   slideForce: 130
   slideScale: 0.6
   downForce: 10

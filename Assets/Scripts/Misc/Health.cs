@@ -29,6 +29,10 @@ public class Health : MonoBehaviour
 
     void CheckHealth()
     {
+        if (GetComponent<PlayerMovement>())
+        {
+            FindObjectOfType<UIManager>().SetHealthSlider(currentHealth, maxHealth);
+        }
         if (currentHealth <= 0)
         {
             KillObject();

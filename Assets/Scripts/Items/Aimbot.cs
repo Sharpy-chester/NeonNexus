@@ -42,7 +42,6 @@ public class Aimbot : Item
             {
                 adjust = 360;
             }
-            Debug.Log(cam.transform.eulerAngles.x + adjust + " : " + (cam.transform.eulerAngles.x > 90));
             playerLook.UpdateRot(cam.transform.eulerAngles.x + adjust, cam.transform.eulerAngles.y);
         }
     }

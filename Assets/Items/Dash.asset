@@ -15,5 +15,6 @@ MonoBehaviour:
   ItemName: Dash
   IconMat: {fileID: 2100000, guid: ba2b2f02263a1974e893d08e33ea2b27, type: 2}
   Rarity: 2
+  removeFromPool: 1
   dashForce: 50
   dashTimer: 3
