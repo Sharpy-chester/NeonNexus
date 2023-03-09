@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: BananaPeel
   m_EditorClassIdentifier: 
   ItemName: Banana Peel
+  Description: Extra slidey
   IconMat: {fileID: 2100000, guid: f99e46b216341684aaecc0240140b7cc, type: 2}
   Rarity: 4
+  removeFromPool: 0
   slideForceIncrease: 50

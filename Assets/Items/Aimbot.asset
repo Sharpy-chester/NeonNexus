@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Aimbot
   m_EditorClassIdentifier: 
   ItemName: Aimbot
+  Description: Locks onto enemies
   IconMat: {fileID: 2100000, guid: 4ceed861cc5f3414290804375ead4071, type: 2}
   Rarity: 1
   removeFromPool: 1

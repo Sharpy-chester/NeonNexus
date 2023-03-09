@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: Steroids
   m_EditorClassIdentifier: 
   ItemName: Steroids
+  Description: I am speed
   IconMat: {fileID: 2100000, guid: 760ecd511555270448edb77150d7aae2, type: 2}
   Rarity: 4
+  removeFromPool: 0
   speedIncrease: 20

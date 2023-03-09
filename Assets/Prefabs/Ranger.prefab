@@ -2079,6 +2079,7 @@ MonoBehaviour:
   attackRange: 10
   moveSpeed: 4
   acceleration: 8
+  moneyGiven: 25
   eyeTransform: {fileID: 5185926627495019184}
   head: {fileID: 5870267475861798499}
   currentState: 0

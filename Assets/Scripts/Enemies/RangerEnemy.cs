@@ -24,6 +24,12 @@ public class RangerEnemy : Enemy
         navAgent.acceleration = acceleration;
     }
 
+    /*void OnEnable()
+    {
+        Idle();
+        canSeePlayer = false;
+    }*/
+
     void Update()
     {
         
@@ -48,10 +54,15 @@ public class RangerEnemy : Enemy
                         currentCooldown = 0;
                     }
                 }
-                else
+                else if (DistToPlayer() < seeRange)
                 {
                     currentCooldown = 0;
                     RunTowardPlayer();
+                }
+                else
+                {
+                    Idle();
+                    canSeePlayer = false;
                 }
             }
             else
@@ -86,8 +97,14 @@ public class RangerEnemy : Enemy
     void Idle()
     {
         currentState = PlayerState.Idle;
-        navAgent.isStopped = true;
-        animator.SetTrigger("Idle");
+        if (navAgent)
+        {
+            navAgent.isStopped = true;
+        }
+        if(animator)
+        {
+            animator.SetTrigger("Idle");
+        }
     }
 
     void ShootBullet()

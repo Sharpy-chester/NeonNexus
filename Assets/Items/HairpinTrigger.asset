@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: HairpinTrigger
   m_EditorClassIdentifier: 
   ItemName: Hairpin Trigger
+  Description: Your fire rate has never been faster
   IconMat: {fileID: 2100000, guid: a7b18d64c501279468e795e6801470a4, type: 2}
   Rarity: 3
+  removeFromPool: 0
   fireRateIncrease: 0.1

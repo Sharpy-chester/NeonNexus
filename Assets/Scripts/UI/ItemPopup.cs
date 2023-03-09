@@ -30,7 +30,7 @@ public class ItemPopup : MonoBehaviour
             cGroup.alpha -= Time.deltaTime / fadeTime;
             if (cGroup.alpha >= 1)
             {
-                gameObject.SetActive(false);
+                fadeOut = false;
             }
             return;
         }

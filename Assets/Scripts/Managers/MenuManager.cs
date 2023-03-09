@@ -9,17 +9,17 @@ public class MenuManager : MonoBehaviour
 
     public void LoadOptionsMenu()
     {
-        SceneManager.LoadScene(optionsMenuName);
+        
     }
 
     public void LoadGame()
     {
-        SceneManager.LoadScene(gameSceneName);
+        StartCoroutine(LevelManager.Instance.SwitchLevel(gameSceneName));
     }
 
     public void LoadMainMenu()
     {
-        SceneManager.LoadScene(mainMenuName);
+        StartCoroutine(LevelManager.Instance.SwitchLevel(mainMenuName));
     }
 
     public void QuitGame()
