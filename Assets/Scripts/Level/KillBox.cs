@@ -1,23 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class KillBox : MonoBehaviour
+namespace LevelGeneration
 {
-    GameManager gm;
-
-    void Awake()
+    public class KillBox : MonoBehaviour
     {
-        gm = FindObjectOfType<GameManager>();
-    }
+        GameManager gm;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
+        void Awake()
         {
-            gm.RestartLevel();
+            gm = FindObjectOfType<GameManager>();
         }
-        
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                gm.RestartLevel();
+            }
+        }
     }
-    
 }
+

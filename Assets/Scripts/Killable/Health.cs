@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Health : MonoBehaviour
@@ -7,6 +5,8 @@ public class Health : MonoBehaviour
     [SerializeField] int maxHealth;
     int currentHealth;
     GameManager gm;
+    public delegate void OnDeath();
+    public event OnDeath onDeath;
 
     void Start()
     {
@@ -29,7 +29,7 @@ public class Health : MonoBehaviour
 
     void CheckHealth()
     {
-        if (GetComponent<PlayerMovement>())
+        if (gameObject.CompareTag("Player"))
         {
             FindObjectOfType<UIManager>().SetHealthSlider(currentHealth, maxHealth);
         }
@@ -41,13 +41,10 @@ public class Health : MonoBehaviour
 
     void KillObject()
     {
-        if (GetComponent<PlayerMovement>() && gm)
+        onDeath?.Invoke();
+        if (gameObject.CompareTag("Player") && gm)
         {
             gm.Lose();
-        }
-        else if (TryGetComponent(out Enemy enemy))
-        {
-            enemy.Die();
         }
         else
         {

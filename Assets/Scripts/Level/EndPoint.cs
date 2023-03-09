@@ -1,21 +1,22 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class EndPoint : MonoBehaviour
+namespace LevelGeneration
 {
-    GameManager manager;
-
-    private void Awake()
+    public class EndPoint : MonoBehaviour
     {
-        manager = FindObjectOfType<GameManager>();
-    }
+        GameManager manager;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.transform.CompareTag("Player"))
+        private void Awake()
         {
-            manager.EndPointReached();
+            manager = FindObjectOfType<GameManager>();
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.transform.CompareTag("Player"))
+            {
+                manager.EndPointReached();
+            }
         }
     }
 }

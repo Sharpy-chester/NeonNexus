@@ -1,22 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Player;
 
-[CreateAssetMenu(fileName = "Speed Increase", menuName = "Items/Speed Increase", order = 5)]
-public class SpeedIncrease : Item
+namespace Items
 {
-    [SerializeField] float speedIncrease;
-
-    public override void OnAdd(GameObject playerGO)
+    [CreateAssetMenu(fileName = "Speed Increase", menuName = "Items/Speed Increase", order = 5)]
+    public class SpeedIncrease : Item
     {
-        playerGO.GetComponent<PlayerMovement>().IncreaseSpeed(speedIncrease);
-    }
+        [SerializeField] float speedIncrease;
 
-    public override void OnCollision(Collision collision)
-    {
-    }
+        public override void OnAdd(GameObject playerGO)
+        {
+            playerGO.GetComponent<PlayerMovement>().IncreaseSpeed(speedIncrease);
+        }
 
-    public override void OnUpdate()
-    {
+        public override void OnCollision(Collision collision)
+        {
+        }
+
+        public override void OnUpdate()
+        {
+        }
     }
 }

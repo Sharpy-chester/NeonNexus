@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     UIManager uiManager;
-    GameObject player;
+    [SerializeField] GameObject player;
     public int money { get; private set; }
 
     public delegate void OnMoneyChanged();
@@ -15,7 +13,6 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         uiManager = FindObjectOfType<UIManager>();
-        player = FindObjectOfType<PlayerMovement>().gameObject;
     }
 
     public void EndPointReached()

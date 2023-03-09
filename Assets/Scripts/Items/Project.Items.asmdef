@@ -1,0 +1,17 @@
+{
+    "name": "Project.Items",
+    "rootNamespace": "",
+    "references": [
+        "GUID:22d06cc71b534a645bd8b3becdfc4026",
+        "GUID:1ff78d8227157c84ba44a3c859afacb4"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

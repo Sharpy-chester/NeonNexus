@@ -1,0 +1,19 @@
+{
+    "name": "Project.Level",
+    "rootNamespace": "",
+    "references": [
+        "GUID:4355a94144d32aa488a7971d51d347a6",
+        "GUID:8984b61ddbb69684fbb0b77e7d590750",
+        "GUID:8c4dd21966739024fbd72155091d199e",
+        "GUID:5d8f90cb0c3dc214cad2b388662ec451"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

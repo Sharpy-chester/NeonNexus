@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -50,10 +48,5 @@ public class UIManager : MonoBehaviour
         moneyText.text = gameManager.money.ToString();
     }
 
-    public void DisplayItemPopup(Item item)
-    {
-        itemPopup.SetActive(true);
-        itemPopupTitle.text = item.ItemName;
-        itemPopupDescription.text = item.Description;
-    }
+    
 }

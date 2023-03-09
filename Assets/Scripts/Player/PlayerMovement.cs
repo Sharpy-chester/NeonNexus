@@ -1,71 +1,68 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+namespace Player
 {
-    Rigidbody rb;
-    PlayerJump jump;
-
-    [Tooltip("Normal speed the player runs at")]
-    [SerializeField] float runSpeed = 10.0f;
-    [Range(1, 10)]
-    [SerializeField] float runDrag = 6.0f;
-    [Range(0.1f, 1)]
-    [SerializeField] float airDrag = 0.0f;
-    public float airSpeed = 0.3f;
-    internal float startAirSpeed = 0.3f;
-
-    Vector3 direction;
-    float speed;
-    internal bool canRun = true;
-
-    void Start()
+    public class PlayerMovement : MonoBehaviour
     {
-        rb = GetComponent<Rigidbody>();
-        rb.freezeRotation = true;
-        speed = runSpeed;
-        jump = GetComponent<PlayerJump>();
-        startAirSpeed = airSpeed;
-    }
+        Rigidbody rb;
+        PlayerJump jump;
 
-    void Update()
-    {
-        if (canRun)
+        [Tooltip("Normal speed the player runs at")]
+        [SerializeField] float runSpeed = 10.0f;
+        [Range(1, 10)]
+        [SerializeField] float runDrag = 6.0f;
+        [Range(0.1f, 1)]
+        [SerializeField] float airDrag = 0.0f;
+        public float airSpeed = 0.3f;
+        internal float startAirSpeed = 0.3f;
+
+        Vector3 direction;
+        float speed;
+        internal bool canRun = true;
+
+        void Start()
         {
-            FindMoveDir();
-        }
-        else
-        {
-            direction = Vector3.zero;
+            rb = GetComponent<Rigidbody>();
+            rb.freezeRotation = true;
+            speed = runSpeed;
+            jump = GetComponent<PlayerJump>();
+            startAirSpeed = airSpeed;
         }
 
-        if (jump)
+        void Update()
         {
-            rb.drag = jump.Grounded() ? runDrag : airDrag;
-            speed = jump.Grounded() ? runSpeed : airSpeed;
+            if (canRun)
+            {
+                FindMoveDir();
+            }
+            else
+            {
+                direction = Vector3.zero;
+            }
+
+            if (jump)
+            {
+                rb.drag = jump.Grounded() ? runDrag : airDrag;
+                speed = jump.Grounded() ? runSpeed : airSpeed;
+            }
         }
-    }
 
-    void FindMoveDir()
-    {
-        //Find the move direction by getting inputs
-        direction = transform.forward * Input.GetAxisRaw("Vertical") + transform.right * Input.GetAxisRaw("Horizontal");
-    }
-
-    void FixedUpdate()
-    {
-        //Physics updates in fixed update so doing it in here makes it smoother
-        //Normalised the direction so that it has a magnatude of 1. Otherwise, if the player is going 
-        //diagonal, they go faster than the move speed
-        if(canRun)
+        void FindMoveDir()
         {
-            rb.AddForce(direction.normalized * speed, ForceMode.Acceleration);
+            direction = transform.forward * Input.GetAxisRaw("Vertical") + transform.right * Input.GetAxisRaw("Horizontal");
         }
-    }
 
-    public void IncreaseSpeed(float amt)
-    {
-        runSpeed += amt;
+        void FixedUpdate()
+        {
+            if (canRun)
+            {
+                rb.AddForce(direction.normalized * speed, ForceMode.Acceleration);
+            }
+        }
+
+        public void IncreaseSpeed(float amt)
+        {
+            runSpeed += amt;
+        }
     }
 }

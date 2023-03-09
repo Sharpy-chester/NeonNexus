@@ -1,24 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+namespace Enemies
 {
-    public int bulletDamage;
-    bool hit = false;
-
-    private void OnCollisionEnter(Collision collision)
+    public class Bullet : MonoBehaviour
     {
-        if (!hit)
+        public int bulletDamage;
+        bool hit = false;
+
+        private void OnCollisionEnter(Collision collision)
         {
-            Destroy(gameObject);
-            hit = true;
-            Health hp = collision.gameObject.GetComponent<Health>();
-            if (hp)
+            if (!hit)
             {
-                hp.ReduceHealth(bulletDamage);
+                Destroy(gameObject);
+                hit = true;
+                Health hp = collision.gameObject.GetComponent<Health>();
+                if (hp)
+                {
+                    hp.ReduceHealth(bulletDamage);
+                }
+
             }
-            
         }
     }
 }

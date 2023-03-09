@@ -1,91 +1,92 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerJump : MonoBehaviour
+namespace Player
 {
-    Rigidbody rb;
-    PlayerWallRun wallRun;
-    internal bool canJump = true;
-    internal bool hasJumped = false;
-    [SerializeField] float jumpForce;
-    [SerializeField] float wallRunJumpForce;
-    [SerializeField] float groundedDist = 1.1f;
-
-    public delegate void OnGrounded();
-    public event OnGrounded onGrounded;
-
-    bool grounded = true;
-
-    void Start()
+    public class PlayerJump : MonoBehaviour
     {
-        rb = GetComponent<Rigidbody>();
-        wallRun = GetComponent<PlayerWallRun>();
-    }
+        Rigidbody rb;
+        PlayerWallRun wallRun;
+        public bool canJump = true;
+        public bool hasJumped = false;
+        [SerializeField] float jumpForce;
+        [SerializeField] float wallRunJumpForce;
+        [SerializeField] float groundedDist = 1.1f;
 
-    void Update()
-    {
-        //Grounded check for events
-        if (Grounded())
+        public delegate void OnGrounded();
+        public event OnGrounded onGrounded;
+
+        bool grounded = true;
+
+        void Start()
         {
-            if (!grounded)
-            {
-                grounded = true;
-                hasJumped = false;
-                onGrounded?.Invoke();
-            }
-        }
-        else
-        {
-            if (grounded)
-            {
-                grounded = false;
-            }
+            rb = GetComponent<Rigidbody>();
+            wallRun = GetComponent<PlayerWallRun>();
         }
 
-        if(Input.GetButtonDown("Jump") && canJump)
+        void Update()
         {
-            if(wallRun && wallRun.isWallRunning && !grounded) //wall run jump
+            //Grounded check for events
+            if (Grounded())
             {
-                switch (wallRun.wallRunDir)
+                if (!grounded)
                 {
-                    case PlayerWallRun.WallRunDirection.left:
-                        rb.AddRelativeForce(new Vector3(wallRunJumpForce, jumpForce, 0), ForceMode.Impulse);
-                        break;
-                    case PlayerWallRun.WallRunDirection.right:
-                        rb.AddRelativeForce(new Vector3(-wallRunJumpForce, jumpForce, 0), ForceMode.Impulse);
-                        break;
-                    case PlayerWallRun.WallRunDirection.none:
-                        break;
-                    default:
-                        break;
+                    grounded = true;
+                    hasJumped = false;
+                    onGrounded?.Invoke();
                 }
-                wallRun.EndWallRun();
             }
-            else if (grounded) //Normal Jump
+            else
             {
-                hasJumped = true;
-                rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+                if (grounded)
+                {
+                    grounded = false;
+                }
+            }
+
+            if (Input.GetButtonDown("Jump") && canJump)
+            {
+                if (wallRun && wallRun.isWallRunning && !grounded) //wall run jump
+                {
+                    switch (wallRun.wallRunDir)
+                    {
+                        case PlayerWallRun.WallRunDirection.left:
+                            rb.AddRelativeForce(new Vector3(wallRunJumpForce, jumpForce, 0), ForceMode.Impulse);
+                            break;
+                        case PlayerWallRun.WallRunDirection.right:
+                            rb.AddRelativeForce(new Vector3(-wallRunJumpForce, jumpForce, 0), ForceMode.Impulse);
+                            break;
+                        case PlayerWallRun.WallRunDirection.none:
+                            break;
+                        default:
+                            break;
+                    }
+                    wallRun.EndWallRun();
+                }
+                else if (grounded) //Normal Jump
+                {
+                    hasJumped = true;
+                    rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+                }
+            }
+
+
+        }
+
+        public bool Grounded()
+        {
+            if (Physics.Raycast(transform.position, -transform.up, out RaycastHit hit, groundedDist))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
 
-
-    }
-
-    public bool Grounded()
-    {
-        if (Physics.Raycast(transform.position, -transform.up, out RaycastHit hit, groundedDist))
+        public void IncreaseJumpForce(float amt)
         {
-            return true;
+            jumpForce += amt;
         }
-        else
-        {
-            return false;
-        } 
-    }
-
-    public void IncreaseJumpForce(float amt)
-    {
-        jumpForce += amt;
     }
 }

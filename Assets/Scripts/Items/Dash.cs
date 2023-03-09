@@ -1,33 +1,36 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Player;
 
-[CreateAssetMenu(fileName = "Dash", menuName = "Items/Dash", order = 7)]
-public class Dash : Item
+namespace Items
 {
-    [SerializeField] float dashForce = 10.0f;
-    [SerializeField] float dashTimer = 3.0f;
-    float currentDashTimer = 0.0f;
-    PlayerJump jump;
-    Rigidbody rb;
-
-    public override void OnAdd(GameObject playerGO)
+    [CreateAssetMenu(fileName = "Dash", menuName = "Items/Dash", order = 7)]
+    public class Dash : Item
     {
-        jump = playerGO.GetComponent<PlayerJump>();
-        rb = playerGO.GetComponent<Rigidbody>();
-    }
+        [SerializeField] float dashForce = 10.0f;
+        [SerializeField] float dashTimer = 3.0f;
+        float currentDashTimer = 0.0f;
+        PlayerJump jump;
+        Rigidbody rb;
 
-    public override void OnCollision(Collision collision)
-    {
-    }
-
-    public override void OnUpdate()
-    {
-        currentDashTimer += Time.deltaTime;
-        if (Input.GetButtonDown("Dash") && currentDashTimer > dashTimer && jump.Grounded())
+        public override void OnAdd(GameObject playerGO)
         {
-            currentDashTimer = 0.0f;
-            rb.AddForce(rb.transform.forward * dashForce, ForceMode.Impulse); 
+            jump = playerGO.GetComponent<PlayerJump>();
+            rb = playerGO.GetComponent<Rigidbody>();
+        }
+
+        public override void OnCollision(Collision collision)
+        {
+        }
+
+        public override void OnUpdate()
+        {
+            currentDashTimer += Time.deltaTime;
+            if (Input.GetButtonDown("Dash") && currentDashTimer > dashTimer && jump.Grounded())
+            {
+                currentDashTimer = 0.0f;
+                rb.AddForce(rb.transform.forward * dashForce, ForceMode.Impulse); 
+            }
         }
     }
 }
+

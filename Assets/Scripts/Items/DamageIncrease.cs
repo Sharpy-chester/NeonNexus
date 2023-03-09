@@ -1,22 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Player;
 
-[CreateAssetMenu(fileName = "Damage Increase", menuName = "Items/Damage Increase", order = 4)]
-public class DamageIncrease : Item
+namespace Items
 {
-    [SerializeField] int damageIncrease;
-
-    public override void OnAdd(GameObject playerGO)
+    [CreateAssetMenu(fileName = "Damage Increase", menuName = "Items/Damage Increase", order = 4)]
+    public class DamageIncrease : Item
     {
-        playerGO.GetComponent<PlayerShoot>().IncreaseDamage(damageIncrease);
-    }
+        [SerializeField] int damageIncrease;
 
-    public override void OnCollision(Collision collision)
-    {
-    }
+        public override void OnAdd(GameObject playerGO)
+        {
+            playerGO.GetComponent<PlayerShoot>().IncreaseDamage(damageIncrease);
+        }
 
-    public override void OnUpdate()
-    {
+        public override void OnCollision(Collision collision)
+        {
+        }
+
+        public override void OnUpdate()
+        {
+        }
     }
 }

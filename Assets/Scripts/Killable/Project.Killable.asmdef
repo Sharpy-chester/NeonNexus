@@ -1,0 +1,16 @@
+{
+    "name": "Project.Killable",
+    "rootNamespace": "",
+    "references": [
+        "GUID:4355a94144d32aa488a7971d51d347a6"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,61 +1,63 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerShoot : MonoBehaviour
+namespace Player
 {
-    [SerializeField] int bulletDamage;
-    [SerializeField] Transform fireTransform;
-    [SerializeField] Animator gunAnim;
-    [SerializeField] AnimationClip shootAnim;
-    [SerializeField] GameObject muzzleFlash;
-    public float weaponCooldown = 0.5f;
-    [SerializeField] float cooldownCap = 0.1f;
-    float currentCooldown = 0;
-    Transform cam;
-
-    public delegate void OnShoot();
-    public event OnShoot onShoot;
-
-    private void Start()
+    public class PlayerShoot : MonoBehaviour
     {
-        cam = Camera.main.transform;
-        gunAnim.SetFloat("AnimMultiplier", weaponCooldown / shootAnim.length);
-    }
+        [SerializeField] int bulletDamage;
+        [SerializeField] Transform fireTransform;
+        [SerializeField] Animator gunAnim;
+        [SerializeField] AnimationClip shootAnim;
+        [SerializeField] GameObject muzzleFlash;
+        public float weaponCooldown = 0.5f;
+        [SerializeField] float cooldownCap = 0.1f;
+        float currentCooldown = 0;
+        Transform cam;
 
-    void Update()
-    {
-        currentCooldown += Time.deltaTime;
-        if (Input.GetButtonDown("Fire1") && currentCooldown > weaponCooldown)
+        public delegate void OnShoot();
+        public event OnShoot onShoot;
+
+        private void Start()
         {
-            onShoot?.Invoke();
-            currentCooldown = 0;
-            gunAnim.SetTrigger("Fire");
-            GameObject mFlash = Instantiate(muzzleFlash, fireTransform);
-            Destroy(mFlash, 0.3f);
+            cam = Camera.main.transform;
+            gunAnim.SetFloat("AnimMultiplier", weaponCooldown / shootAnim.length);
+        }
 
-            if (Physics.Raycast(cam.position, cam.forward, out RaycastHit hit))
+        void Update()
+        {
+            currentCooldown += Time.deltaTime;
+            if (Input.GetButtonDown("Fire1") && currentCooldown > weaponCooldown)
             {
-                if (hit.transform.GetComponent<Enemy>())
+                onShoot?.Invoke();
+                currentCooldown = 0;
+                gunAnim.SetTrigger("Fire");
+                GameObject mFlash = Instantiate(muzzleFlash, fireTransform);
+                Destroy(mFlash, 0.3f);
+
+                if (Physics.Raycast(cam.position, cam.forward, out RaycastHit hit))
                 {
-                    hit.transform.GetComponent<Health>().ReduceHealth(bulletDamage);
+                    if (hit.transform.CompareTag("Enemy"))
+                    {
+                        hit.transform.GetComponent<Health>().ReduceHealth(bulletDamage);
+                    }
                 }
             }
         }
-    }
 
-    public void IncreaseFireRate(float amt)
-    {
-        if (weaponCooldown - amt >= cooldownCap)
+        public void IncreaseFireRate(float amt)
         {
-            weaponCooldown -= amt;
-            gunAnim.SetFloat("AnimMultiplier", shootAnim.length / weaponCooldown);
-            print(shootAnim.length / weaponCooldown);
+            if (weaponCooldown - amt >= cooldownCap)
+            {
+                weaponCooldown -= amt;
+                gunAnim.SetFloat("AnimMultiplier", shootAnim.length / weaponCooldown);
+                print(shootAnim.length / weaponCooldown);
+            }
+        }
+
+        public void IncreaseDamage(int amt)
+        {
+            bulletDamage += amt;
         }
     }
-
-    public void IncreaseDamage(int amt)
-    {
-        bulletDamage += amt;
-    }
 }
+

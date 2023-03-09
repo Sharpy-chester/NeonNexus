@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Enemies;
 
 public abstract class Enemy : MonoBehaviour
 {
@@ -16,6 +15,7 @@ public abstract class Enemy : MonoBehaviour
     internal int layerMask;
     internal bool canSeePlayer = false;
     internal bool alive = true;
+    Health health;
 
     internal GameObject player;
     internal NavMeshAgent navAgent;
@@ -33,10 +33,12 @@ public abstract class Enemy : MonoBehaviour
 
     public void InitVariables()
     {
-        player = FindObjectOfType<PlayerMovement>().gameObject;
+        player = GameObject.FindGameObjectWithTag("Player");
         layerMask = 1 << (LayerMask.NameToLayer("Player")); //Filter out enemy layer
         animator = GetComponent<Animator>();
         EnemyManager.Instance.AddEnemy(this);
+        health = GetComponent<Health>();
+        health.onDeath += Die;
     }
 
     public float DistToPlayer()

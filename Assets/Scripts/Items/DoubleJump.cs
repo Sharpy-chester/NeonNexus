@@ -1,44 +1,47 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Player;
 
-[CreateAssetMenu(fileName = "DoubleJump", menuName = "Items/Double Jump", order = 1)]
-public class DoubleJump : Item
+namespace Items
 {
-    PlayerJump jump;
-    Rigidbody rb;
-    PlayerWallRun wallRun;
-    [SerializeField] float jumpForce;
-    bool hasDoubleJumped = false;
-    GameObject player;
-
-    void StartDoubleJump()
+    [CreateAssetMenu(fileName = "DoubleJump", menuName = "Items/Double Jump", order = 1)]
+    public class DoubleJump : Item
     {
-        if (Input.GetButtonDown("Jump") && !jump.Grounded() && jump.hasJumped && !hasDoubleJumped && !wallRun.isWallRunning)
+        PlayerJump jump;
+        Rigidbody rb;
+        PlayerWallRun wallRun;
+        [SerializeField] float jumpForce;
+        bool hasDoubleJumped = false;
+        GameObject player;
+
+        void StartDoubleJump()
         {
-            hasDoubleJumped = true;
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            if (Input.GetButtonDown("Jump") && !jump.Grounded() && jump.hasJumped && !hasDoubleJumped && !wallRun.isWallRunning)
+            {
+                hasDoubleJumped = true;
+                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            }
         }
-    }
 
-    void ResetDoubleJump()
-    {
-        hasDoubleJumped = false;
-    }
+        void ResetDoubleJump()
+        {
+            hasDoubleJumped = false;
+        }
 
-    public override void OnUpdate()
-    {
-        StartDoubleJump();
-    }
+        public override void OnUpdate()
+        {
+            StartDoubleJump();
+        }
 
-    public override void OnAdd(GameObject playerGO)
-    {
-        player = playerGO;
-        rb = player.GetComponent<Rigidbody>();
-        wallRun = player.GetComponent<PlayerWallRun>();
-        jump = player.GetComponent<PlayerJump>();
-        jump.onGrounded += ResetDoubleJump;
-    }
+        public override void OnAdd(GameObject playerGO)
+        {
+            player = playerGO;
+            rb = player.GetComponent<Rigidbody>();
+            wallRun = player.GetComponent<PlayerWallRun>();
+            jump = player.GetComponent<PlayerJump>();
+            jump.onGrounded += ResetDoubleJump;
+        }
 
-    public override void OnCollision(Collision collision) { }
+        public override void OnCollision(Collision collision) { }
+}
+
 }

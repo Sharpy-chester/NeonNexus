@@ -1,22 +1,25 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Player;
 
-[CreateAssetMenu(fileName = "Jump Height Increase", menuName = "Items/Jump Height Increase", order = 6)]
-public class JumpHeightIncrease : Item
+namespace Items
 {
-    [SerializeField] float jumpForceIncrease;
-
-    public override void OnAdd(GameObject playerGO)
+    [CreateAssetMenu(fileName = "Jump Height Increase", menuName = "Items/Jump Height Increase", order = 6)]
+    public class JumpHeightIncrease : Item
     {
-        playerGO.GetComponent<PlayerJump>().IncreaseJumpForce(jumpForceIncrease);
-    }
+        [SerializeField] float jumpForceIncrease;
 
-    public override void OnCollision(Collision collision)
-    {
-    }
+        public override void OnAdd(GameObject playerGO)
+        {
+            playerGO.GetComponent<PlayerJump>().IncreaseJumpForce(jumpForceIncrease);
+        }
 
-    public override void OnUpdate()
-    {
+        public override void OnCollision(Collision collision)
+        {
+        }
+
+        public override void OnUpdate()
+        {
+        }
     }
 }
+

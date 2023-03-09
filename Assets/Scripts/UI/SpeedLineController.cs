@@ -1,29 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Player;
 
-public class SpeedLineController : MonoBehaviour
+namespace UIElements
 {
-    ParticleSystem speedLinePS;
-    Rigidbody playerRB;
-    public float minVelocity;
-
-    void Start()
+    public class SpeedLineController : MonoBehaviour
     {
-        speedLinePS = GetComponent<ParticleSystem>();
-        playerRB = FindObjectOfType<PlayerMovement>().GetComponent<Rigidbody>();
-    }
+        ParticleSystem speedLinePS;
+        Rigidbody playerRB;
+        public float minVelocity;
 
-    void Update()
-    {
-        if (playerRB && playerRB.velocity.magnitude > minVelocity)
+        void Start()
         {
-            speedLinePS.Play();
+            speedLinePS = GetComponent<ParticleSystem>();
+            playerRB = FindObjectOfType<PlayerMovement>().GetComponent<Rigidbody>();
         }
-        else if (speedLinePS.isEmitting)
+
+        void Update()
         {
-            speedLinePS.Pause();
-            speedLinePS.Clear();
+            if (playerRB && playerRB.velocity.magnitude > minVelocity)
+            {
+                speedLinePS.Play();
+            }
+            else if (speedLinePS.isEmitting)
+            {
+                speedLinePS.Pause();
+                speedLinePS.Clear();
+            }
         }
     }
 }
+

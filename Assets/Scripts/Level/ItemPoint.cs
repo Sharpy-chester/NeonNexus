@@ -1,12 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemPoint : MonoBehaviour
+namespace LevelGeneration
 {
-    void OnDrawGizmos()
+    public class ItemPoint : MonoBehaviour
     {
-        Gizmos.color = Color.green;
-        Gizmos.DrawSphere(transform.position, 0.5f);
+        void OnDrawGizmos()
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawSphere(transform.position, 0.5f);
+        }
     }
 }
+
