@@ -46,7 +46,7 @@ public class Health : MonoBehaviour
         {
             gm.Lose();
         }
-        else
+        else if (!gameObject.CompareTag("Enemy"))
         {
             Destroy(gameObject);
         }

@@ -28,9 +28,10 @@ namespace UIElements
             if (fadeOut)
             {
                 cGroup.alpha -= Time.deltaTime / fadeTime;
-                if (cGroup.alpha >= 1)
+                if (cGroup.alpha <= 0)
                 {
                     fadeOut = false;
+                    gameObject.SetActive(false);
                 }
                 return;
             }

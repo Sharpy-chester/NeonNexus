@@ -5,6 +5,7 @@ namespace LevelManagement
     public class MenuManager : MonoBehaviour
     {
         [SerializeField] string optionsMenuName, mainMenuName, gameSceneName;
+        [SerializeField] GameObject mainMenu, characterMenu, optionsMenu;
 
         public void LoadOptionsMenu()
         {
@@ -24,6 +25,21 @@ namespace LevelManagement
         public void QuitGame()
         {
             Application.Quit();
+        }
+
+        public void ToggleMainMenu()
+        {
+            mainMenu.SetActive(!mainMenu.activeSelf);
+        }
+
+        public void ToggleCharacterMenu()
+        {
+            characterMenu.SetActive(!characterMenu.activeSelf);
+        }
+
+        public void ToggleOptionsMenu()
+        {
+            optionsMenu.SetActive(!optionsMenu.activeSelf);
         }
     }
 }

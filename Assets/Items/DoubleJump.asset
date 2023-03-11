@@ -15,6 +15,7 @@ MonoBehaviour:
   ItemName: DoubleJump
   Description: Jump midair
   IconMat: {fileID: 2100000, guid: d866021c2f87ed34ba0b6adf581881fd, type: 2}
+  IconSprite: {fileID: 21300000, guid: 083237d4baf78d143b4251ca612f18dd, type: 3}
   Rarity: 1
   removeFromPool: 1
   jumpForce: 10

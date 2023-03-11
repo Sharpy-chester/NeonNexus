@@ -10,9 +10,19 @@ namespace Player
         UIManager uiManager;
         [SerializeField] GameObject itemPopup;
         [SerializeField] TextMeshProUGUI itemPopupTitle, itemPopupDescription;
+        SkillHandler skillHandler;
 
         void Start()
         {
+            if (items == null)
+            {
+                items = new List<Item>();
+            }
+            skillHandler = FindObjectOfType<SkillHandler>();
+            if(skillHandler)
+            {
+                items.AddRange(skillHandler.skills);
+            }
             foreach (Item i in items)
             {
                 i.OnAdd(gameObject);

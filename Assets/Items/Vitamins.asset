@@ -15,6 +15,7 @@ MonoBehaviour:
   ItemName: Vitamins
   Description: Feeling better?
   IconMat: {fileID: 2100000, guid: db202d397993b694795613bb1fe048d2, type: 2}
+  IconSprite: {fileID: 21300000, guid: fa0c219867d3b7b48bdefe7bc0498b20, type: 3}
   Rarity: 4
   removeFromPool: 0
   healthIncrease: 2

@@ -15,6 +15,7 @@ MonoBehaviour:
   ItemName: FMJ
   Description: Massive damage
   IconMat: {fileID: 2100000, guid: c967e8341476ec540b74d5ffb4b28771, type: 2}
+  IconSprite: {fileID: 21300000, guid: 84f667a0eed51a340b7b37327afb72ea, type: 3}
   Rarity: 3
   removeFromPool: 0
   damageIncrease: 2

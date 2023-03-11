@@ -15,6 +15,7 @@ MonoBehaviour:
   ItemName: Aimbot
   Description: Locks onto enemies
   IconMat: {fileID: 2100000, guid: 4ceed861cc5f3414290804375ead4071, type: 2}
+  IconSprite: {fileID: 21300000, guid: c5f0ca2ab7668624485abfa08257f175, type: 3}
   Rarity: 1
   removeFromPool: 1
   lockOnAngle: 60

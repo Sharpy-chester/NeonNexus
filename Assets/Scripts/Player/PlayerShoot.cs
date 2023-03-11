@@ -50,7 +50,6 @@ namespace Player
             {
                 weaponCooldown -= amt;
                 gunAnim.SetFloat("AnimMultiplier", shootAnim.length / weaponCooldown);
-                print(shootAnim.length / weaponCooldown);
             }
         }
 

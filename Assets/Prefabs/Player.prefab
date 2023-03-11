@@ -255,6 +255,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0929022611a509f48892dca686e05c12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canJump: 1
+  hasJumped: 0
   jumpForce: 10
   wallRunJumpForce: 5
   groundedDist: 1.1
@@ -270,6 +272,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23224f5bfcab0394383e7606fe106f7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isWallRunning: 0
   wallRunDist: 0.8
   wallRunGravity: 0.1
 --- !u!114 &1978887780
@@ -306,6 +309,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   items:
   - {fileID: 11400000, guid: 73b2ffd0db3773249b368192815191f4, type: 2}
+  itemPopup: {fileID: 0}
+  itemPopupTitle: {fileID: 0}
+  itemPopupDescription: {fileID: 0}
 --- !u!114 &1978887790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -318,7 +324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5137b50d918ba849a8799153e4f1a1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 15
 --- !u!114 &1978887799
 MonoBehaviour:
   m_ObjectHideFlags: 0
