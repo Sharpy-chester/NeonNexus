@@ -36,6 +36,7 @@ namespace LevelManagement
 
         private void OnLevelWasLoaded(int level)
         {
+            Time.timeScale = 1;
             if (loadingScreenGroup.alpha == 1)
             {
                 StartCoroutine(FadeLoadingScreenOut());
@@ -46,7 +47,7 @@ namespace LevelManagement
         {
             while (loadingScreenGroup.alpha < 1)
             {
-                loadingScreenGroup.alpha += loadingScreenFadeTime * Time.deltaTime;
+                loadingScreenGroup.alpha += loadingScreenFadeTime * Time.unscaledDeltaTime;
                 yield return null;
             }
             AsyncOperation load = SceneManager.LoadSceneAsync(levelName);

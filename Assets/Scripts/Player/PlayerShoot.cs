@@ -20,7 +20,7 @@ namespace Player
         private void Start()
         {
             cam = Camera.main.transform;
-            gunAnim.SetFloat("AnimMultiplier", weaponCooldown / shootAnim.length);
+            gunAnim.SetFloat("AnimMultiplier", shootAnim.length / weaponCooldown);
         }
 
         void Update()

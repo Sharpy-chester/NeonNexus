@@ -11,11 +11,13 @@ public class OptionsMenu : MonoBehaviour
     [SerializeField] AudioMixer audioMixer;
     [SerializeField] TMP_Dropdown resolutionDropdown, graphicsDropdown;
     [SerializeField] Toggle fullscreenToggle;
-    
+
+    Resolution currentResolution;
     Resolution[] resolutions;
 
     void Start()
     {
+        currentResolution = Screen.currentResolution;
         InitResolutions();
         InitQuality();
         InitFullscreen();
@@ -29,7 +31,8 @@ public class OptionsMenu : MonoBehaviour
     public void SetResolution(int resolutionIndex)
     {
         Resolution resolution = resolutions[resolutionIndex];
-        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreenMode);
+        currentResolution = resolution;
     }
 
     public void ToggleFullscreen(bool isFullscreen)
@@ -37,6 +40,7 @@ public class OptionsMenu : MonoBehaviour
         fullscreenToggle.isOn = isFullscreen;
         Screen.fullScreenMode = isFullscreen ? FullScreenMode.MaximizedWindow : FullScreenMode.Windowed;
         Screen.fullScreen = isFullscreen;
+        Screen.SetResolution(currentResolution.width, currentResolution.height, isFullscreen);
     }
 
     public void SetQuality(int quality)

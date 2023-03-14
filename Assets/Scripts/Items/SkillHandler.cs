@@ -19,5 +19,6 @@ public class SkillHandler : MonoBehaviour
     public void AddItems(List<Item> items)
     {
         skills.AddRange(items);
+
     }
 }
