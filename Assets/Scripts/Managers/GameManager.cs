@@ -10,6 +10,9 @@ public class GameManager : MonoBehaviour
     public delegate void OnMoneyChanged();
     public event OnMoneyChanged onMoneyChanged;
 
+    public delegate void EnemyDeath();
+    public event EnemyDeath enemyDeath;
+
     private void Awake()
     {
         uiManager = FindObjectOfType<UIManager>();
@@ -40,5 +43,10 @@ public class GameManager : MonoBehaviour
     {
         money += moneyToAdd;
         onMoneyChanged?.Invoke();
+    }
+
+    public void TriggerEnemyDeathEvent()
+    {
+        enemyDeath?.Invoke();
     }
 }

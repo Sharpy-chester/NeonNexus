@@ -9,7 +9,7 @@ namespace Menu
         public bool unlocked;
         public bool purchased;
 
-        [SerializeField] int UnlockCost;
+        [SerializeField] int unlockCost;
 
         [SerializeField] List<Skill> requiredSkills;
         List<Skill> requiredFor;
@@ -27,12 +27,14 @@ namespace Menu
         [SerializeField] Item itemToGivePlayer;
 
         [SerializeField] Image icon;
+        Nexbit nexbitManager;
 
         void Awake()
         {
             tile = GetComponent<Image>();
             CheckIfUnlockable();
             icon.sprite = itemToGivePlayer.IconSprite;
+            nexbitManager = FindObjectOfType<Nexbit>();
         }
 
         private void Update()
@@ -62,9 +64,10 @@ namespace Menu
 
         public void Purchase()
         {
-            if(!purchased)
+            if(!purchased && (nexbitManager.nexbits - unlockCost) > 0)
             {
                 purchased = true;
+                nexbitManager.RemoveNexbits(unlockCost);
                 skillTree.RefreshSkills();
                 tile.color = purchasedColour;
                 skillTree.AddItem(itemToGivePlayer);

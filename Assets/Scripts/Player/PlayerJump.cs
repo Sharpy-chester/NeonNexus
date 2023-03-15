@@ -15,6 +15,9 @@ namespace Player
         public delegate void OnGrounded();
         public event OnGrounded onGrounded;
 
+        public delegate void OnNotGrounded();
+        public event OnNotGrounded onNotGrounded;
+
         bool grounded = true;
 
         void Start()
@@ -40,6 +43,7 @@ namespace Player
                 if (grounded)
                 {
                     grounded = false;
+                    onNotGrounded?.Invoke();
                 }
             }
 

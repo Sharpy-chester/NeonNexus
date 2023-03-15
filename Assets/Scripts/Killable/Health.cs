@@ -8,6 +8,8 @@ public class Health : MonoBehaviour
     public delegate void OnDeath();
     public event OnDeath onDeath;
 
+    
+
     void Start()
     {
         gm = FindObjectOfType<GameManager>();
@@ -45,6 +47,10 @@ public class Health : MonoBehaviour
         if (gameObject.CompareTag("Player") && gm)
         {
             gm.Lose();
+        }
+        else if (gameObject.CompareTag("Enemy"))
+        {
+            gm.TriggerEnemyDeathEvent();
         }
         else if (!gameObject.CompareTag("Enemy"))
         {
