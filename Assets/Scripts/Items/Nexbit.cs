@@ -53,7 +53,7 @@ public class Nexbit : MonoBehaviour
         if (inAir)
         {
             airtime += Time.deltaTime;
-            airtimeTxt.text = airtime.ToString("00.00");
+            airtimeTxt.text = ((int)(airtime * airtimeMultiplier) * (int)(speed * speedMultiplier)).ToString();
         }
         if(playerRB)
         {
@@ -78,6 +78,11 @@ public class Nexbit : MonoBehaviour
     void CalculateNexbits()
     {
         nexbits += (int)(airtime * airtimeMultiplier) * (int)(speed * speedMultiplier);
+        if (nexbitTxt)
+        {
+            nexbitTxt.text = nexbits.ToString();
+        }
+
     }
 
     public void RemoveNexbits(int amt)
