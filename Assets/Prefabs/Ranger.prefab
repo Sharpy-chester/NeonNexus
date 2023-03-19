@@ -2102,6 +2102,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 10
+  hitSound: {fileID: 8300000, guid: e0efb38dd4b71de4a978d3bd1d824946, type: 3}
 --- !u!205 &-3943266523599628518
 LODGroup:
   m_ObjectHideFlags: 0

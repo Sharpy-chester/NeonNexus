@@ -8,7 +8,6 @@ using System.Linq;
 
 public class OptionsMenu : MonoBehaviour
 {
-    [SerializeField] AudioMixer audioMixer;
     [SerializeField] TMP_Dropdown resolutionDropdown, graphicsDropdown;
     [SerializeField] Toggle fullscreenToggle;
 
@@ -21,6 +20,7 @@ public class OptionsMenu : MonoBehaviour
         InitResolutions();
         InitQuality();
         InitFullscreen();
+        AudioManager.Instance.LoadAudio();
     }
 
     void Update()

@@ -7,6 +7,7 @@ public class Health : MonoBehaviour
     GameManager gm;
     public delegate void OnDeath();
     public event OnDeath onDeath;
+    [SerializeField] AudioClip hitSound;
 
     
 
@@ -20,6 +21,7 @@ public class Health : MonoBehaviour
     {
         print("health");
         currentHealth -= damage;
+        AudioManager.Instance.SpawnAudio(hitSound, transform);
         CheckHealth();
     }
 

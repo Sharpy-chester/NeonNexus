@@ -44,6 +44,10 @@ public class PauseMenu : MonoBehaviour
 
     public void ToggleOptionsScreen()
     {
+        if (optionsScreen.activeSelf)
+        {
+            AudioManager.Instance.SaveAudio();
+        }
         optionsScreen.SetActive(!optionsScreen.activeSelf);
     }
 

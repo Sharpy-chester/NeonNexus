@@ -34,7 +34,10 @@ namespace Player
                 gunAnim.SetTrigger("Fire");
                 GameObject mFlash = Instantiate(muzzleFlash, fireTransform);
                 Destroy(mFlash, 0.3f);
-                AudioManager.Instance.SpawnAudio(shootSFX, transform.position);
+                if(AudioManager.Instance)
+                {
+                    AudioManager.Instance.SpawnAudio(shootSFX, transform);
+                }
                 if (Physics.Raycast(cam.position, cam.forward, out RaycastHit hit))
                 {
                     if (hit.transform.CompareTag("Enemy"))
