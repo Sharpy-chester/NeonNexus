@@ -1,10 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 namespace Menu
 {
-    public class Skill : MonoBehaviour
+    public class Skill : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         public bool unlocked;
         public bool purchased;
@@ -28,6 +29,7 @@ namespace Menu
 
         [SerializeField] Image icon;
         Nexbit nexbitManager;
+        Tooltip tooltip;
 
         void Awake()
         {
@@ -35,6 +37,7 @@ namespace Menu
             CheckIfUnlockable();
             icon.sprite = itemToGivePlayer.IconSprite;
             nexbitManager = FindObjectOfType<Nexbit>();
+            tooltip = FindObjectOfType<Tooltip>();
         }
 
         private void Update()
@@ -72,6 +75,16 @@ namespace Menu
                 tile.color = purchasedColour;
                 skillTree.AddItem(itemToGivePlayer);
             }
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            tooltip.ShowTooltip(itemToGivePlayer.name + " : " + "<font=\"StandardGalacticAlphabet SDF\">q</font>" + unlockCost);
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            tooltip.HideTooltip();
         }
     }
 }

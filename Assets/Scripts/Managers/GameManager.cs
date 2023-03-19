@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
     public delegate void EnemyDeath();
     public event EnemyDeath enemyDeath;
 
+    public delegate void GameEnd();
+    public event GameEnd gameEnd;
+
     private void Awake()
     {
         uiManager = FindObjectOfType<UIManager>();
@@ -20,6 +23,7 @@ public class GameManager : MonoBehaviour
 
     public void EndPointReached()
     {
+        gameEnd?.Invoke();
         uiManager.EnableWinScreen();
         Destroy(player);
         Cursor.lockState = CursorLockMode.None;
@@ -28,6 +32,7 @@ public class GameManager : MonoBehaviour
 
     public void Lose()
     {
+        gameEnd?.Invoke();
         uiManager.EnableLoseScreen();
         Destroy(player);
         Cursor.lockState = CursorLockMode.None;

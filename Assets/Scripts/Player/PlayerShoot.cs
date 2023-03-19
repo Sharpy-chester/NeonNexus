@@ -8,6 +8,7 @@ namespace Player
         [SerializeField] Transform fireTransform;
         [SerializeField] Animator gunAnim;
         [SerializeField] AnimationClip shootAnim;
+        [SerializeField] AudioClip shootSFX;
         [SerializeField] GameObject muzzleFlash;
         public float weaponCooldown = 0.5f;
         [SerializeField] float cooldownCap = 0.1f;
@@ -26,14 +27,14 @@ namespace Player
         void Update()
         {
             currentCooldown += Time.deltaTime;
-            if (Input.GetButtonDown("Fire1") && currentCooldown > weaponCooldown)
+            if (Input.GetButtonDown("Fire1") && currentCooldown > weaponCooldown && Time.timeScale == 1)
             {
                 onShoot?.Invoke();
                 currentCooldown = 0;
                 gunAnim.SetTrigger("Fire");
                 GameObject mFlash = Instantiate(muzzleFlash, fireTransform);
                 Destroy(mFlash, 0.3f);
-
+                AudioManager.Instance.SpawnAudio(shootSFX, transform.position);
                 if (Physics.Raycast(cam.position, cam.forward, out RaycastHit hit))
                 {
                     if (hit.transform.CompareTag("Enemy"))

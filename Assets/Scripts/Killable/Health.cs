@@ -18,6 +18,7 @@ public class Health : MonoBehaviour
 
     public void ReduceHealth(int damage)
     {
+        print("health");
         currentHealth -= damage;
         CheckHealth();
     }

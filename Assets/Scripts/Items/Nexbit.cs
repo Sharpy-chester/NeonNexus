@@ -44,7 +44,7 @@ public class Nexbit : MonoBehaviour
         }
         if(airtimeTxt)
         {
-            airtimeTxt.text = nexbits.ToString();
+            airtimeTxt.text = 0.ToString();
         }
     }
 
@@ -53,12 +53,12 @@ public class Nexbit : MonoBehaviour
         if (inAir)
         {
             airtime += Time.deltaTime;
-            airtimeTxt.text = ((int)(airtime * airtimeMultiplier) * (int)(speed * speedMultiplier)).ToString();
+            airtimeTxt.text = ((int)((airtime + 1) * airtimeMultiplier) * (int)(speed * speedMultiplier)).ToString();
         }
         if(playerRB)
         {
             speed = playerRB.velocity.magnitude;
-            speedTxt.text = "Speed: " + ((int)speed).ToString();
+            speedTxt.text = "Speed: " + ((int)speed).ToString() + " KM/h";
         }
     }
 
@@ -77,7 +77,7 @@ public class Nexbit : MonoBehaviour
 
     void CalculateNexbits()
     {
-        nexbits += (int)(airtime * airtimeMultiplier) * (int)(speed * speedMultiplier);
+        nexbits += (int)((airtime + 1) * airtimeMultiplier) * (int)(speed * speedMultiplier);
         if (nexbitTxt)
         {
             nexbitTxt.text = nexbits.ToString();

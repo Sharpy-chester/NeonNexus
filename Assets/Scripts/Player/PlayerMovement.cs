@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Player
@@ -5,7 +6,11 @@ namespace Player
     public class PlayerMovement : MonoBehaviour
     {
         Rigidbody rb;
+        AudioSource audioSource;
         PlayerJump jump;
+        [SerializeField] float footstepCooldown = 0.5f;
+        float currentFootstepCooldown = 0.0f;
+        [SerializeField] List<AudioClip> runSFX = new();
 
         [Tooltip("Normal speed the player runs at")]
         [SerializeField] float runSpeed = 10.0f;
@@ -27,6 +32,8 @@ namespace Player
             speed = runSpeed;
             jump = GetComponent<PlayerJump>();
             startAirSpeed = airSpeed;
+            audioSource = GetComponent<AudioSource>();
+            audioSource.Pause();
         }
 
         void Update()
@@ -42,8 +49,17 @@ namespace Player
 
             if (jump)
             {
-                rb.drag = jump.Grounded() ? runDrag : airDrag;
-                speed = jump.Grounded() ? runSpeed : airSpeed;
+                bool isGrounded = jump.Grounded();
+                rb.drag = isGrounded ? runDrag : airDrag; //to optimise, use jump events
+                speed = isGrounded ? runSpeed : airSpeed;
+                currentFootstepCooldown -= Time.deltaTime;
+                if (isGrounded && rb.velocity.magnitude > 3f && Time.timeScale > 0.5f && currentFootstepCooldown <= 0)
+                {
+                    audioSource.Stop();
+                    AudioClip clip = runSFX[Random.Range(0, runSFX.Count)];
+                    currentFootstepCooldown = footstepCooldown;
+                    audioSource.PlayOneShot(clip);
+                }
             }
         }
 
