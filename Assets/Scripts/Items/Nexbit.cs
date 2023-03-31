@@ -12,9 +12,23 @@ public class Nexbit : MonoBehaviour
     float airtime = 0;
     [Range(0.1f, 1)]
     [SerializeField] float airtimeMultiplier;
+    [SerializeField] float airtimeCutoff = 3f;
     float speed = 0;
     [Range(0.1f, 1)]
     [SerializeField] float speedMultiplier;
+
+    [SerializeField] int baseHealthIncrease = 2;
+    [SerializeField] float healthDecreaseTime = 5f;
+    float currentHealthDecreaseTime = 0f;
+    int airtimeScore = 0;
+    [SerializeField] TextMeshProUGUI airtimeScoreTxt, wallrunScoreTxt, killScoreTxt, speedScoreTxt;
+    bool reduceHealth = true;
+    [SerializeField] float scoreTurnoffTime = 2f;
+    int speedScore = 0;
+
+    PlayerWallRun wallrun;
+    float currentWallrunTime = 0;
+    UIManager uiManager;
 
     GameManager gm;
     [SerializeField] TextMeshProUGUI nexbitTxt, speedTxt, airtimeTxt;
@@ -26,6 +40,7 @@ public class Nexbit : MonoBehaviour
 
     private void Start()
     {
+        uiManager = FindObjectOfType<UIManager>();
         nexbits = PlayerPrefs.GetInt("Nexbits");
         if(nexbitTxt)
         {
@@ -41,6 +56,7 @@ public class Nexbit : MonoBehaviour
         {
             pj.onNotGrounded += InAir;
             pj.onGrounded += NotInAir;
+            wallrun = pj.GetComponent<PlayerWallRun>();
         }
         if(airtimeTxt)
         {
@@ -50,15 +66,106 @@ public class Nexbit : MonoBehaviour
 
     private void Update()
     {
+        if(wallrun)
+        {
+            if (wallrun.isWallRunning && inAir)
+            {
+                if(!wallrunScoreTxt.gameObject.activeSelf)
+                {
+                    wallrunScoreTxt.gameObject.SetActive(true);
+                }
+                currentWallrunTime += Time.deltaTime;
+                wallrunScoreTxt.text = "Wallrun Score: " + (int)(currentWallrunTime * 100);
+                
+            }
+            else if (currentWallrunTime != 0)
+            {
+                if (currentWallrunTime > 3)
+                {
+                    IncreaseHealth();
+                }
+                uiManager.AddScore((int)(currentWallrunTime * 100));
+                currentWallrunTime = 0;
+                StartCoroutine(TurnScoreOff(scoreTurnoffTime, wallrunScoreTxt.gameObject));
+            }
+        }
         if (inAir)
         {
             airtime += Time.deltaTime;
             airtimeTxt.text = ((int)((airtime + 1) * airtimeMultiplier) * (int)(speed * speedMultiplier)).ToString();
+            if(airtime >= airtimeCutoff)
+            {
+                if (!airtimeScoreTxt.gameObject.activeSelf)
+                {
+                    airtimeScoreTxt.gameObject.SetActive(true);
+                }
+                airtimeScore = (int)(airtime * 30);
+                airtimeScoreTxt.text = "Airtime Score: " + airtimeScore;
+
+                if (speed > 15)
+                {
+                    if (!speedScoreTxt.gameObject.activeSelf)
+                    {
+                        speedScoreTxt.gameObject.SetActive(true);
+                    }
+                    speedScore = (int)speed;
+                    speedScoreTxt.text = "Speed Score: " + ((int)speed).ToString();
+                }
+                else
+                {
+                    if (speedScoreTxt.gameObject.activeSelf)
+                    {
+                        speedScoreTxt.gameObject.SetActive(false);
+                    }
+                    speedScore = 0;
+                }
+            }
+            
+            
+        }
+        else if (airtimeScoreTxt.gameObject.activeSelf)
+        {
+            if(airtimeScore > 50)
+            {
+                IncreaseHealth();
+            }
+            StartCoroutine(TurnScoreOff(scoreTurnoffTime, airtimeScoreTxt.gameObject));
+            uiManager.AddScore(airtimeScore);
+            airtimeScore = 0;
+
+            if (speed > 25)
+            {
+                IncreaseHealth();
+            }
+            StartCoroutine(TurnScoreOff(scoreTurnoffTime, speedScoreTxt.gameObject));
+            uiManager.AddScore(speedScore);
+            speedScore = 0;
+
+        }
+        {
+
         }
         if(playerRB)
         {
             speed = playerRB.velocity.magnitude;
             speedTxt.text = "Speed: " + ((int)speed).ToString() + " KM/h";
+            currentHealthDecreaseTime += Time.deltaTime;
+            if (currentHealthDecreaseTime > healthDecreaseTime)
+            {
+                currentHealthDecreaseTime = 0;
+                if (playerRB.TryGetComponent(out Health health))
+                {
+                    health.ReduceHealth(1);
+                }
+            }
+        }
+    }
+
+    void IncreaseHealth()
+    {
+        if (playerRB.TryGetComponent(out Health health))
+        {
+            health.ReduceHealth(-1);
         }
     }
 
@@ -77,12 +184,23 @@ public class Nexbit : MonoBehaviour
 
     void CalculateNexbits()
     {
-        nexbits += (int)((airtime + 1) * airtimeMultiplier) * (int)(speed * speedMultiplier);
+        int calculatedScore = (int)((airtime + 1) * airtimeMultiplier) * (int)(speed * speedMultiplier);
+        nexbits += calculatedScore;
         if (nexbitTxt)
         {
             nexbitTxt.text = nexbits.ToString();
         }
+        killScoreTxt.gameObject.SetActive(true);
+        killScoreTxt.text = "Enemy killed: " + calculatedScore * 10;
+        uiManager.AddScore(calculatedScore * 10);
+        IncreaseHealth();
+        StartCoroutine(TurnScoreOff(scoreTurnoffTime, killScoreTxt.gameObject));
+    }
 
+    IEnumerator TurnScoreOff(float time, GameObject go) //this will become an issue if the player kills multiple enemies at once, but oh well
+    {
+        yield return new WaitForSeconds(time);
+        go.SetActive(false);
     }
 
     public void RemoveNexbits(int amt)

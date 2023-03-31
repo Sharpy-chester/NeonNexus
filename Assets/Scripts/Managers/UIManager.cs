@@ -10,10 +10,12 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI moneyText;
     [SerializeField] TextMeshProUGUI timerText;
     [SerializeField] GameObject itemPopup;
-    [SerializeField] TextMeshProUGUI itemPopupTitle, itemPopupDescription;
+    [SerializeField] TextMeshProUGUI itemPopupTitle, itemPopupDescription, scoreTxt;
     GameManager gameManager;
     float timer;
     bool runTimer = true;
+    int score;
+
 
     void Start()
     {
@@ -30,6 +32,13 @@ public class UIManager : MonoBehaviour
             timerText.text = (timer / 100).ToString("00.00");
             timerText.text = Mathf.Floor(timer / 60).ToString("00") + ":" + Mathf.Floor(timer % 60).ToString("00");
         }
+    }
+
+
+    public void AddScore(int amt)
+    {
+        score += amt;
+        scoreTxt.text = score.ToString();
     }
 
     public void StopTimer()

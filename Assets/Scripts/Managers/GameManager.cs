@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public delegate void GameEnd();
     public event GameEnd gameEnd;
 
+
     private void Awake()
     {
         uiManager = FindObjectOfType<UIManager>();
