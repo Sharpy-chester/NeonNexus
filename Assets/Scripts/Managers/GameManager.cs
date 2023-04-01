@@ -15,7 +15,8 @@ public class GameManager : MonoBehaviour
 
     public delegate void GameEnd();
     public event GameEnd gameEnd;
-
+    [HideInInspector] public int finalScore, airtimeScore, enemyScore, wallrunScore, speedScore, winScore;
+    [SerializeField] int winBonus = 10000;
 
     private void Awake()
     {
@@ -24,8 +25,10 @@ public class GameManager : MonoBehaviour
 
     public void EndPointReached()
     {
-        gameEnd?.Invoke();
+        winScore = winBonus;
         uiManager.EnableWinScreen();
+        gameEnd?.Invoke();
+
         Destroy(player);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;

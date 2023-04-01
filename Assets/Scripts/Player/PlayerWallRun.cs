@@ -10,6 +10,7 @@ namespace Player
         [SerializeField] float wallRunDist;
         [Range(0, 1)]
         [SerializeField] float wallRunGravity = 0.1f;
+        [SerializeField] float minSpeed = 2f;
 
         internal WallRunDirection wallRunDir = WallRunDirection.none;
 
@@ -45,12 +46,12 @@ namespace Player
         {
             Debug.DrawLine(transform.position, transform.position + -transform.right * wallRunDist, Color.green);
             Debug.DrawLine(transform.position, transform.position + transform.right * wallRunDist, Color.green);
-            if (Physics.Raycast(transform.position, -transform.right, out RaycastHit leftHit, wallRunDist))
+            if (Physics.Raycast(transform.position, -transform.right, out RaycastHit leftHit, wallRunDist) && rb.velocity.magnitude > minSpeed)
             {
                 wallRunDir = WallRunDirection.left;
                 StartWallRun();
             }
-            else if (Physics.Raycast(transform.position, transform.right, out RaycastHit rightHit, wallRunDist))
+            else if (Physics.Raycast(transform.position, transform.right, out RaycastHit rightHit, wallRunDist) && rb.velocity.magnitude > minSpeed)
             {
                 wallRunDir = WallRunDirection.right;
                 StartWallRun();

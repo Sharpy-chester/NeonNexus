@@ -26,8 +26,16 @@ namespace Player
 
         void Update()
         {
-            currentCooldown += Time.deltaTime;
-            if (Input.GetButtonDown("Fire1") && currentCooldown > weaponCooldown && Time.timeScale == 1)
+            currentCooldown += Time.unscaledDeltaTime;
+            if(Time.timeScale != 1 && Time.timeScale != 0)
+            {
+                gunAnim.SetFloat("AnimMultiplier", (shootAnim.length / weaponCooldown) / (Time.timeScale / 1.5f));
+            }
+            else if (gunAnim.GetFloat("AnimMultiplier") != shootAnim.length / weaponCooldown)
+            {
+                gunAnim.SetFloat("AnimMultiplier", shootAnim.length / weaponCooldown);
+            }
+            if (Input.GetButtonDown("Fire1") && currentCooldown > weaponCooldown && Time.timeScale > 0.1f)
             {
                 onShoot?.Invoke();
                 currentCooldown = 0;

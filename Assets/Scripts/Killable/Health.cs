@@ -19,9 +19,14 @@ public class Health : MonoBehaviour
 
     public void ReduceHealth(int damage)
     {
-        print("health");
         currentHealth -= damage;
         AudioManager.Instance.SpawnAudio(hitSound, transform);
+        CheckHealth();
+    }
+
+    public void IncreaseHealth(int amt)
+    {
+        currentHealth += amt;
         CheckHealth();
     }
 

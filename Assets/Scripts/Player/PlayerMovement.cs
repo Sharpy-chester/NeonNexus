@@ -53,7 +53,7 @@ namespace Player
                 rb.drag = isGrounded ? runDrag : airDrag; //to optimise, use jump events
                 speed = isGrounded ? runSpeed : airSpeed;
                 currentFootstepCooldown -= Time.deltaTime;
-                if (isGrounded && rb.velocity.magnitude > 3f && Time.timeScale > 0.5f && currentFootstepCooldown <= 0)
+                if (isGrounded && rb.velocity.magnitude > 3f && Time.timeScale > 0.1f && currentFootstepCooldown <= 0)
                 {
                     audioSource.Stop();
                     AudioClip clip = runSFX[Random.Range(0, runSFX.Count)];
