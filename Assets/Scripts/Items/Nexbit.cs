@@ -125,7 +125,7 @@ public class Nexbit : MonoBehaviour
             
             
         }
-        else if (airtimeScoreTxt.gameObject.activeSelf)
+        else if (airtimeScoreTxt && airtimeScoreTxt.gameObject.activeSelf)
         {
             if(airtimeScore > 50)
             {
@@ -215,6 +215,7 @@ public class Nexbit : MonoBehaviour
         {
             nexbitTxt.text = nexbits.ToString();
         }
+        PlayerPrefs.SetInt("Nexbits", nexbits);
     }
 
     void SaveNexbits(Scene current, Scene next)

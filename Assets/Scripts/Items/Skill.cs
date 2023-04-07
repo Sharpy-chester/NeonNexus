@@ -2,11 +2,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System;
 
 namespace Menu
 {
+    [Serializable]
     public class Skill : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
+        public int id;
         public bool unlocked;
         public bool purchased;
 
@@ -25,13 +28,13 @@ namespace Menu
 
         [SerializeField] SkillTree skillTree;
 
-        [SerializeField] Item itemToGivePlayer;
+        public Item itemToGivePlayer;
 
         [SerializeField] Image icon;
         Nexbit nexbitManager;
         Tooltip tooltip;
 
-        void Awake()
+        void OnEnable()
         {
             tile = GetComponent<Image>();
             CheckIfUnlockable();
@@ -60,7 +63,11 @@ namespace Menu
                         }
                     }
                 }
-                tile.color = unlocked ? unlockedColour : lockedColour;
+                if(tile)
+                {
+                    tile.color = unlocked ? unlockedColour : lockedColour;
+                    tile.color = purchased ? purchasedColour : tile.color;
+                }
             }
             button.enabled = unlocked;
         }
@@ -73,8 +80,20 @@ namespace Menu
                 nexbitManager.RemoveNexbits(unlockCost);
                 skillTree.RefreshSkills();
                 tile.color = purchasedColour;
-                skillTree.AddItem(itemToGivePlayer);
+                skillTree.AddItem(itemToGivePlayer, this);
             }
+        }
+
+        public void FreePurchase()
+        {
+            unlocked = true;
+            purchased = true;
+            if (tile)
+            {
+                tile.color = purchasedColour;
+            }
+            button.enabled = false;
+            skillTree.RefreshSkills();
         }
 
         public void OnPointerEnter(PointerEventData eventData)

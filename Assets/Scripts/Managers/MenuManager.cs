@@ -1,15 +1,17 @@
 using UnityEngine;
+using TMPro;
 
 namespace LevelManagement
 {
     public class MenuManager : MonoBehaviour
     {
-        [SerializeField] string optionsMenuName, mainMenuName, gameSceneName;
+        [SerializeField] string mainMenuName, gameSceneName;
         [SerializeField] GameObject mainMenu, characterMenu, optionsMenu;
+        [SerializeField] TextMeshProUGUI highscoreTxt;
 
-        public void LoadOptionsMenu()
+        private void Start()
         {
-
+            highscoreTxt.text = "High Score: " + PlayerPrefs.GetInt("HighScore");
         }
 
         public void LoadGame()
