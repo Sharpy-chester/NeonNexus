@@ -5,7 +5,7 @@ namespace LevelManagement
 {
     public class MenuManager : MonoBehaviour
     {
-        [SerializeField] string mainMenuName, gameSceneName;
+        [SerializeField] string mainMenuName, gameSceneName, tutorialSceneName;
         [SerializeField] GameObject mainMenu, characterMenu, optionsMenu;
         [SerializeField] TextMeshProUGUI highscoreTxt;
 
@@ -16,7 +16,14 @@ namespace LevelManagement
 
         public void LoadGame()
         {
-            StartCoroutine(LevelManager.Instance.SwitchLevel(gameSceneName));
+            if(PlayerPrefs.GetInt("TutorialComplete") == 1)
+            {
+                StartCoroutine(LevelManager.Instance.SwitchLevel(gameSceneName));
+            }
+            else
+            {
+                StartCoroutine(LevelManager.Instance.SwitchLevel(tutorialSceneName));
+            }
         }
 
         public void LoadMainMenu()
