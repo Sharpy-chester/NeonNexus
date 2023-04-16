@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4187ee2f6693a6f43a912f50812a2b1b, type: 3}
+  m_Name: Wallrun
+  m_EditorClassIdentifier: 
+  title: Wallrunning
+  description: To wallrun, get close to a wall while in the air. You can also jump
+    off a wall by pressing the jump button.
+  timeOnScreen: 5
+  currentTime: 6.159995
+  gm: {fileID: 0}

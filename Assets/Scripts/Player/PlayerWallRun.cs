@@ -14,6 +14,9 @@ namespace Player
 
         internal WallRunDirection wallRunDir = WallRunDirection.none;
 
+        public delegate void StartWallrun();
+        public event StartWallrun startWallrun;
+
         internal enum WallRunDirection
         {
             left,
@@ -44,8 +47,6 @@ namespace Player
 
         void CheckWallRun()
         {
-            Debug.DrawLine(transform.position, transform.position + -transform.right * wallRunDist, Color.green);
-            Debug.DrawLine(transform.position, transform.position + transform.right * wallRunDist, Color.green);
             if (Physics.Raycast(transform.position, -transform.right, out RaycastHit leftHit, wallRunDist) && rb.velocity.magnitude > minSpeed)
             {
                 wallRunDir = WallRunDirection.left;

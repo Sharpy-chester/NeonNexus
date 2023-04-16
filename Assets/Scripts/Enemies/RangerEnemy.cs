@@ -20,6 +20,7 @@ namespace Enemies
             navAgent = gameObject.AddComponent<NavMeshAgent>();
             navAgent.speed = moveSpeed;
             navAgent.acceleration = acceleration;
+            Idle();
         }
 
         /*void OnEnable()
@@ -69,7 +70,7 @@ namespace Enemies
                     canSeePlayer = false;
                 }
             }
-            else if (!player)
+            else
             {
                 Idle();
                 canSeePlayer = false;
@@ -78,6 +79,7 @@ namespace Enemies
 
         void RunTowardPlayer()
         {
+            Debug.Log("StartRunning");
             navAgent.isStopped = false;
             currentState = PlayerState.Running;
             animator.SetTrigger("Run");

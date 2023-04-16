@@ -14,6 +14,7 @@ namespace Player
         [SerializeField] float cooldownCap = 0.1f;
         float currentCooldown = 0;
         Transform cam;
+        int layer = ~(1 << 10);
 
         public delegate void OnShoot();
         public event OnShoot onShoot;
@@ -46,7 +47,7 @@ namespace Player
                 {
                     AudioManager.Instance.SpawnAudio(shootSFX, transform);
                 }
-                if (Physics.Raycast(cam.position, cam.forward, out RaycastHit hit))
+                if (Physics.Raycast(cam.position, cam.forward, out RaycastHit hit, Mathf.Infinity, layer))
                 {
                     if (hit.transform.CompareTag("Enemy"))
                     {

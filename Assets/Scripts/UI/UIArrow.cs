@@ -5,12 +5,15 @@ namespace UIElements
 {
     public class UIArrow : MonoBehaviour
     {
-        Transform endPoint;
+        [SerializeField] Transform endPoint;
         Camera cam;
 
         void Start()
         {
-            endPoint = FindObjectOfType<CityGenerator>().endPoint.transform;
+            if(!endPoint)
+            {
+                endPoint = FindObjectOfType<CityGenerator>().endPoint.transform;
+            }
             cam = Camera.main;
         }
 

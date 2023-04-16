@@ -43,7 +43,11 @@ public abstract class Enemy : MonoBehaviour
 
     public float DistToPlayer()
     {
-        return gameObject.activeSelf ? Vector3.Distance(player.transform.position, transform.position) : Vector3.Distance(player.transform.position, pos);
+        if (player)
+        {
+            return gameObject.activeSelf ? Vector3.Distance(player.transform.position, transform.position) : Vector3.Distance(player.transform.position, pos);
+        }
+        else return 1000;
     }
 
     public Vector3 DirToPlayer()

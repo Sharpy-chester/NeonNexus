@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     UIManager uiManager;
-    [SerializeField] GameObject player;
+    public GameObject player;
     public int money { get; private set; }
 
     public delegate void OnMoneyChanged();
