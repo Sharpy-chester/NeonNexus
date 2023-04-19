@@ -14,11 +14,13 @@ public class PlayerBulletTime : MonoBehaviour
     float fixedDelta;
     float timeLeft;
     bool isBt = false;
+    GameManager gm;
 
     void Start()
     {
         timeLeft = maxTime;
         fixedDelta = Time.fixedDeltaTime;
+        gm = FindObjectOfType<GameManager>();
     }
 
     void Update()
@@ -33,11 +35,11 @@ public class PlayerBulletTime : MonoBehaviour
             timeLeft -= Time.unscaledDeltaTime;
             UpdateSlider();
         }
-        if (Input.GetButtonDown("BulletTime") && timeLeft > minAmt)
+        if (Input.GetButtonDown("BulletTime") && timeLeft > minAmt && !gm.paused)
         {
             SlowTime();
         }
-        if (Input.GetButtonUp("BulletTime") || timeLeft <= 0)
+        if ((Input.GetButtonUp("BulletTime") || timeLeft <= 0) && !gm.paused)
         {
             NormalTime();
         }

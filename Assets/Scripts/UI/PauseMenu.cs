@@ -14,6 +14,12 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] TextMeshProUGUI confirmText;
     [SerializeField] string quitToMenuTxt = "Quit to main menu?", quitToDesktopTxt = "Quit to desktop?";
     [SerializeField] string mainMenuName = "MainMenu";
+    GameManager gm;
+
+    private void Start()
+    {
+        gm = FindObjectOfType<GameManager>();
+    }
 
     private void Update()
     {
@@ -26,6 +32,7 @@ public class PauseMenu : MonoBehaviour
     public void TogglePause()
     {
         paused = !paused;
+        gm.paused = paused;
         Time.timeScale = paused ? 0 : 1;
         cg.alpha = paused ? 1 : 0;
         cg.interactable = paused;

@@ -6,7 +6,7 @@ namespace Player
 {
     public class PlayerItemManager : MonoBehaviour
     {
-        [SerializeField] List<Item> items;
+        public List<Item> items;
         UIManager uiManager;
         [SerializeField] GameObject itemPopup;
         [SerializeField] TextMeshProUGUI itemPopupTitle, itemPopupDescription;

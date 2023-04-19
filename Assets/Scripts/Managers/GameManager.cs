@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
     UIManager uiManager;
     public GameObject player;
     public int money { get; private set; }
+    public bool paused = false;
 
     public delegate void OnMoneyChanged();
     public event OnMoneyChanged onMoneyChanged;

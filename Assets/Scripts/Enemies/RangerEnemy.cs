@@ -79,7 +79,6 @@ namespace Enemies
 
         void RunTowardPlayer()
         {
-            Debug.Log("StartRunning");
             navAgent.isStopped = false;
             currentState = PlayerState.Running;
             animator.SetTrigger("Run");
