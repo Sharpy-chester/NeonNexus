@@ -28,9 +28,18 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        SetMasterAudio(PlayerPrefs.GetFloat("Master"));
-        SetSFXAudio(PlayerPrefs.GetFloat("SFX"));
-        SetMusicAudio(PlayerPrefs.GetFloat("Music"));
+        if(PlayerPrefs.GetInt("SoundSaved") == 1)
+        {
+            SetMasterAudio(PlayerPrefs.GetFloat("Master"));
+            SetSFXAudio(PlayerPrefs.GetFloat("SFX"));
+            SetMusicAudio(PlayerPrefs.GetFloat("Music"));
+        }
+        else
+        {
+            SetMasterAudio(0.5f);
+            SetSFXAudio(0.5f);
+            SetMusicAudio(0.5f);
+        }
     }
 
     public void LoadAudio()
@@ -70,16 +79,19 @@ public class AudioManager : MonoBehaviour
     public void SetMasterAudio(float amt)
     {
         mixer.SetFloat("Master", Mathf.Log10(amt) * multiplier);
+        masterSlider.value = amt;
     }
 
     public void SetSFXAudio(float amt)
     {
         mixer.SetFloat("SFX", Mathf.Log10(amt) * multiplier);
+        SFXSlider.value = amt;
     }
 
     public void SetMusicAudio(float amt)
     {
         mixer.SetFloat("Music", Mathf.Log10(amt) * multiplier);
+        musicSlider.value = amt;
     }
 
     public void SaveAudio()
@@ -87,5 +99,6 @@ public class AudioManager : MonoBehaviour
         PlayerPrefs.SetFloat("Master", masterSlider.value);
         PlayerPrefs.SetFloat("SFX", SFXSlider.value);
         PlayerPrefs.SetFloat("Music", musicSlider.value);
+        PlayerPrefs.SetInt("SoundSaved", 1);
     }
 }

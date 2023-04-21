@@ -33,6 +33,7 @@ public class Nexbit : MonoBehaviour
 
     GameManager gm;
     [SerializeField] TextMeshProUGUI nexbitTxt, speedTxt, airtimeTxt;
+    [SerializeField] GameObject healthTxt;
 
     [SerializeField] PlayerJump pj;
     [SerializeField] Rigidbody playerRB;
@@ -83,7 +84,7 @@ public class Nexbit : MonoBehaviour
             {
                 if (currentWallrunTime > 3)
                 {
-                    IncreaseHealth();
+                    IncreaseHealth((int)(currentWallrunTime / 3));
                 }
                 uiManager.AddScore((int)(currentWallrunTime * 100));
                 totalWallrunScore += (int)(currentWallrunTime * 100);
@@ -127,9 +128,9 @@ public class Nexbit : MonoBehaviour
         }
         else if (airtimeScoreTxt && airtimeScoreTxt.gameObject.activeSelf)
         {
-            if(airtimeScore > 50)
+            if(airtimeScore > 30)
             {
-                IncreaseHealth();
+                IncreaseHealth((int)(airtimeScore / 30));
             }
             StartCoroutine(TurnScoreOff(scoreTurnoffTime, airtimeScoreTxt.gameObject));
             uiManager.AddScore(airtimeScore);
@@ -138,7 +139,7 @@ public class Nexbit : MonoBehaviour
 
             if (speed > 25)
             {
-                IncreaseHealth();
+                IncreaseHealth((int)(speed / 25));
             }
             StartCoroutine(TurnScoreOff(scoreTurnoffTime, speedScoreTxt.gameObject));
             uiManager.AddScore(speedScore);
@@ -165,11 +166,14 @@ public class Nexbit : MonoBehaviour
         }
     }
 
-    void IncreaseHealth()
+    void IncreaseHealth(int amt)
     {
         if (playerRB.TryGetComponent(out Health health))
         {
-            health.IncreaseHealth(1);
+            GameObject txt = Instantiate(healthTxt, nexbitTxt.transform.parent.Find("Health"));
+            txt.GetComponent<TextMeshProUGUI>().text = "+" + amt;
+            Destroy(txt, 2.5f);
+            health.IncreaseHealth(amt);
         }
     }
 
@@ -198,7 +202,7 @@ public class Nexbit : MonoBehaviour
         killScoreTxt.text = "Enemy killed: " + calculatedScore * 10;
         uiManager.AddScore(calculatedScore * 10);
         totalKillScore += calculatedScore * 10;
-        IncreaseHealth();
+        IncreaseHealth(2);
         StartCoroutine(TurnScoreOff(scoreTurnoffTime, killScoreTxt.gameObject));
     }
 

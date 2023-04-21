@@ -7,9 +7,7 @@ public class Health : MonoBehaviour
     GameManager gm;
     public delegate void OnDeath();
     public event OnDeath onDeath;
-    [SerializeField] AudioClip hitSound;
-
-    
+    [SerializeField] AudioClip hitSound;    
 
     void Start()
     {
@@ -26,7 +24,14 @@ public class Health : MonoBehaviour
 
     public void IncreaseHealth(int amt)
     {
-        currentHealth += amt;
+        if(currentHealth + amt < maxHealth)
+        {
+            currentHealth += amt;
+        }
+        else
+        {
+            currentHealth = maxHealth;
+        }
         CheckHealth();
     }
 

@@ -8,7 +8,7 @@ namespace Player
         PlayerWallRun wallRun;
         public bool canJump = true;
         public bool hasJumped = false;
-        [SerializeField] float jumpForce;
+        public float jumpForce;
         [SerializeField] float wallRunJumpForce;
         [SerializeField] float groundedDist = 1.1f;
 
@@ -19,6 +19,7 @@ namespace Player
         public event OnNotGrounded onNotGrounded;
 
         bool grounded = true;
+        [SerializeField] float playerGroundedWidth = 0.5f;
 
         void Start()
         {
@@ -78,7 +79,11 @@ namespace Player
 
         public bool Grounded()
         {
-            if (Physics.Raycast(transform.position, -transform.up, out RaycastHit hit, groundedDist))
+            if (Physics.Raycast(transform.position, -transform.up, out _, groundedDist) || 
+                Physics.Raycast(transform.position + new Vector3(playerGroundedWidth, 0, 0), -transform.up, out _, groundedDist) ||
+                Physics.Raycast(transform.position + new Vector3(-playerGroundedWidth, 0, 0), -transform.up, out _, groundedDist) ||
+                Physics.Raycast(transform.position + new Vector3(0, 0, playerGroundedWidth), -transform.up, out _, groundedDist) ||
+                Physics.Raycast(transform.position + new Vector3(0, 0, -playerGroundedWidth), -transform.up, out _, groundedDist))
             {
                 return true;
             }

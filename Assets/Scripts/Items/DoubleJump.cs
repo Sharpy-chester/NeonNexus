@@ -9,7 +9,7 @@ namespace Items
         PlayerJump jump;
         Rigidbody rb;
         PlayerWallRun wallRun;
-        [SerializeField] float jumpForce;
+        [SerializeField] float jumpMultiplier;
         bool hasDoubleJumped = false;
         GameObject player;
 
@@ -18,7 +18,7 @@ namespace Items
             if (Input.GetButtonDown("Jump") && !jump.Grounded() && jump.hasJumped && !hasDoubleJumped && !wallRun.isWallRunning)
             {
                 hasDoubleJumped = true;
-                rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                rb.AddForce(Vector3.up * jumpMultiplier * jump.jumpForce, ForceMode.Impulse);
             }
         }
 

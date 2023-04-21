@@ -20,7 +20,6 @@ public class OptionsMenu : MonoBehaviour
         InitResolutions();
         InitQuality();
         InitFullscreen();
-        AudioManager.Instance.LoadAudio();
     }
 
     void Update()

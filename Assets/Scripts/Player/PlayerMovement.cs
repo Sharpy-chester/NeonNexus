@@ -22,7 +22,7 @@ namespace Player
         internal float startAirSpeed = 0.3f;
 
         Vector3 direction;
-        float speed;
+        [HideInInspector]  public float speed;
         internal bool canRun = true;
 
         void Start()
