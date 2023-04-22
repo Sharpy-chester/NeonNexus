@@ -43,6 +43,11 @@ namespace LevelManagement
             }
         }
 
+        public void LoadLevel(string levelName)
+        {
+            StartCoroutine(SwitchLevel(levelName));
+        }
+
         public IEnumerator SwitchLevel(string levelName)
         {
             while (loadingScreenGroup.alpha < 1)

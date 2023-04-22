@@ -17,6 +17,8 @@ namespace Player
         float startingScale;
         bool sliding = false;
         Vector3 dir;
+        [SerializeField] float rayUpHeight;
+        [SerializeField] float distToHead;
 
         void Start()
         {
@@ -34,7 +36,7 @@ namespace Player
                 StartSliding();
             }
 
-            if (Input.GetButtonUp("Slide") && sliding)
+            if (Input.GetButtonUp("Slide") && sliding && Physics.Raycast(transform.position + new Vector3(0, distToHead, 0), transform.up, out _, rayUpHeight))
             {
                 StopSliding();
             }

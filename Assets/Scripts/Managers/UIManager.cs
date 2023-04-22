@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 using TMPro;
 
 public class UIManager : MonoBehaviour
@@ -11,6 +12,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI timerText;
     [SerializeField] GameObject itemPopup;
     [SerializeField] TextMeshProUGUI itemPopupTitle, itemPopupDescription, scoreTxt;
+    [SerializeField] float winLoseScreenFadeTime = 1f;
     GameManager gameManager;
     float timer;
     bool runTimer = true;
@@ -49,11 +51,24 @@ public class UIManager : MonoBehaviour
     public void EnableWinScreen()
     {
         winScreen.SetActive(true);
+        CanvasGroup c = winScreen.GetComponent<CanvasGroup>();
+        StartCoroutine(FadeScreenIn(c));
     }
 
     public void EnableLoseScreen()
     {
         loseScreen.SetActive(true);
+        CanvasGroup c = loseScreen.GetComponent<CanvasGroup>();
+        StartCoroutine(FadeScreenIn(c));
+    }
+
+    IEnumerator FadeScreenIn(CanvasGroup cg)
+    {
+        while (cg.alpha < 1)
+        {
+            cg.alpha += winLoseScreenFadeTime * Time.deltaTime;
+            yield return null;
+        }
     }
 
     public void SetHealthSlider(int health, int maxHealth)
