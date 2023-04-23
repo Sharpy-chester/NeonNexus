@@ -10,6 +10,7 @@ namespace Player
         [SerializeField] AnimationClip shootAnim;
         [SerializeField] AudioClip shootSFX;
         [SerializeField] GameObject muzzleFlash;
+        [SerializeField] GameObject bloodPrefab;
         public float weaponCooldown = 0.5f;
         [SerializeField] float cooldownCap = 0.1f;
         float currentCooldown = 0;
@@ -52,6 +53,10 @@ namespace Player
                     if (hit.transform.CompareTag("Enemy"))
                     {
                         hit.transform.GetComponent<Health>().ReduceHealth(bulletDamage);
+                        GameObject bp = Instantiate(bloodPrefab, hit.point, Quaternion.identity);
+                        bp.transform.LookAt(transform);
+                        bp.transform.parent = hit.transform;
+                        Destroy(bp, 1f);
                     }
                 }
             }
