@@ -16,16 +16,20 @@ public class GameManager : MonoBehaviour
 
     public delegate void GameEnd();
     public event GameEnd gameEnd;
+    public bool endOfGame = false;
+
     [HideInInspector] public int finalScore, airtimeScore, enemyScore, wallrunScore, speedScore, winScore;
     [SerializeField] int winBonus = 10000;
 
     private void Awake()
     {
         uiManager = FindObjectOfType<UIManager>();
+        endOfGame = false;
     }
 
     public void EndPointReached()
     {
+        endOfGame = true;
         winScore = winBonus;
         uiManager.EnableWinScreen();
         gameEnd?.Invoke();
@@ -37,6 +41,7 @@ public class GameManager : MonoBehaviour
 
     public void Lose()
     {
+        endOfGame = true;
         gameEnd?.Invoke();
         uiManager.EnableLoseScreen();
         Destroy(player);

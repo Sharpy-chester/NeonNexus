@@ -23,7 +23,7 @@ public class PauseMenu : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Pause"))
+        if (Input.GetButtonDown("Pause") && !gm.endOfGame)
         {
             TogglePause();
         }

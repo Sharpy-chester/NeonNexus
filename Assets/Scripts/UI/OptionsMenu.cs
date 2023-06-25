@@ -5,11 +5,13 @@ using UnityEngine.Audio;
 using UnityEngine.UI;
 using TMPro;
 using System.Linq;
+using Player;
 
 public class OptionsMenu : MonoBehaviour
 {
     [SerializeField] TMP_Dropdown resolutionDropdown, graphicsDropdown;
     [SerializeField] Toggle fullscreenToggle;
+    [SerializeField] Slider sensitivitySlider;
 
     Resolution currentResolution;
     Resolution[] resolutions;
@@ -20,6 +22,7 @@ public class OptionsMenu : MonoBehaviour
         InitResolutions();
         InitQuality();
         InitFullscreen();
+        InitSensitivity();
     }
 
     void Update()
@@ -81,5 +84,20 @@ public class OptionsMenu : MonoBehaviour
         resolutionDropdown.AddOptions(options);
         resolutionDropdown.value = currentResolutionIndex;
         resolutionDropdown.RefreshShownValue();
+    }
+
+    void InitSensitivity()
+    {
+        if (PlayerPrefs.GetFloat("Sensitivity") == 0)
+        {
+            PlayerPrefs.SetFloat("Sensitivity", 1);
+        }
+        sensitivitySlider.value = PlayerPrefs.GetFloat("Sensitivity");
+    }
+
+    public void SetSensitivity()
+    {
+        PlayerPrefs.SetFloat("Sensitivity", sensitivitySlider.value);
+
     }
 }

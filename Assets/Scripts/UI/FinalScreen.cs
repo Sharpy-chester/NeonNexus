@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class FinalScreen : MonoBehaviour
@@ -43,5 +44,10 @@ public class FinalScreen : MonoBehaviour
             cg.alpha += fadeTime * Time.unscaledDeltaTime;
             yield return null;
         }
+    }
+
+    public void PlayAgain()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

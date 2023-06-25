@@ -7,7 +7,7 @@ namespace Player
         [SerializeField] Transform vCam;
 
         [Tooltip("Sensitivity of the camera")]
-        [SerializeField] float sens;
+        public float sens;
         internal bool canLook = true;
         bool lockCursor = true;
 
@@ -20,14 +20,19 @@ namespace Player
         {
             Cursor.lockState = lockCursor ? CursorLockMode.Locked : CursorLockMode.None;
             Cursor.visible = !lockCursor;
+
+            if (PlayerPrefs.GetFloat("Sensitivity") == 0)
+            {
+                PlayerPrefs.SetFloat("Sensitivity", 1);
+            }
         }
 
         void Update()
         {
             if(canLook)
             {
-                xrot -= Input.GetAxisRaw("Mouse Y") * sens * multi;
-                yrot += Input.GetAxisRaw("Mouse X") * sens * multi;
+                xrot -= Input.GetAxisRaw("Mouse Y") * sens * multi * PlayerPrefs.GetFloat("Sensitivity");
+                yrot += Input.GetAxisRaw("Mouse X") * sens * multi * PlayerPrefs.GetFloat("Sensitivity");
 
                 xrot = Mathf.Clamp(xrot, -90.0f, 90.0f);
 
